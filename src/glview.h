@@ -4,6 +4,7 @@
 
 
 #import "imageutil.h"
+#import <vector>
 
 class CMesh;
 @class CRenderer;
@@ -17,9 +18,11 @@ class CMesh;
     
     float mouse_x0, mouse_y0;
     
-    CMesh*      mesh;
+    //CMesh*      mesh;
     CRenderer*  renderer;
     NSTimer*    frame_timer;
+    
+    std::vector<CMesh*> meshes;
 }
 
 

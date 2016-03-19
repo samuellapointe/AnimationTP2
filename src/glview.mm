@@ -50,7 +50,7 @@ NSArray* open_files(NSArray* filetype_ext)
 @synthesize bt_start;
 @synthesize bt_stop;
 
--(void)load_mesh:(const char * )fply
+/*-(void)load_mesh:(const char * )fply
 {
     if ( mesh )
         delete mesh;
@@ -68,7 +68,7 @@ NSArray* open_files(NSArray* filetype_ext)
     cout << *mesh << endl;
     //fout0.close();
 #endif
-}
+}*/
 
 - (CVReturn) display_link_callback:(const CVTimeStamp*)outputTime
 {
@@ -94,7 +94,7 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
 
 - (void) awakeFromNib
 {
-    mesh = 0;
+    //mesh = 0;
     frame_timer = 0;
     
     NSOpenGLPixelFormatAttribute attrs[] =
@@ -124,7 +124,7 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
     [self setPixelFormat:pf];
     [self setOpenGLContext:context];
     
-    NSString* file_path_name = nil;
+    /*NSString* file_path_name = nil;
         
     file_path_name = [[NSBundle mainBundle] pathForResource:@"model" ofType:@"ply"];
     [self load_mesh:[file_path_name cStringUsingEncoding:NSUTF8StringEncoding]];
@@ -133,8 +133,11 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
     file_path_name = [url path];
     
     file_path_name = [[NSBundle mainBundle] pathForResource:@"texture" ofType:@"jpg"];
-    mesh->set_diffuse_tex_id(gl_load_texture2D([file_path_name cStringUsingEncoding:NSUTF8StringEncoding]));
-
+    mesh->set_diffuse_tex_id(gl_load_texture2D([file_path_name cStringUsingEncoding:NSUTF8StringEncoding]));*/
+    
+    CMesh* mesh = new CMesh();
+    mesh->CreateRectangle();
+    meshes.push_back(mesh);
     
     GetGLError();
 }
@@ -226,7 +229,7 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
 
 
 
--(IBAction)bt_load_mesh_pressed:(NSButton*)sender
+/*-(IBAction)bt_load_mesh_pressed:(NSButton*)sender
 {
     NSArray* fexts = [[NSArray alloc] initWithObjects:@"ply", nil];
     NSArray* path = open_files(fexts);
@@ -249,10 +252,10 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
     
     [self load_mesh:[fname cStringUsingEncoding:NSUTF8StringEncoding]];
 
-    mesh->set_diffuse_tex_id(diff_tex_id);
+    //mesh->set_diffuse_tex_id(diff_tex_id);
 
     [self draw_view];
-}
+}*/
 
 NSString* choose_image_file()
 {
@@ -280,8 +283,8 @@ NSString* choose_image_file()
     if ( !fname )
         return;
     
-    mesh->delete_diffuse_tex();
-    mesh->set_diffuse_tex_id(gl_load_texture2D([fname cStringUsingEncoding:NSUTF8StringEncoding]));
+    //mesh->delete_diffuse_tex();
+    //mesh->set_diffuse_tex_id(gl_load_texture2D([fname cStringUsingEncoding:NSUTF8StringEncoding]));
 
     [self draw_view];
 }
@@ -349,10 +352,9 @@ static const float rot_factor = 0.25;
 
 - (void)calc_frame:(NSTimer *)pTimer
 {
-    //static long test_counter = 0;
-    //cout << "calc_frame : " << test_counter++ << endl;
-    
-    //** FAIRE LE DESSIN ICI.
+    static long test_counter = 0;
+    cout << "calc_frame : " << test_counter++ << endl;
+
     
     [self setNeedsDisplay:YES];
 }
@@ -367,7 +369,11 @@ static const float rot_factor = 0.25;
 {	 
 	[[self openGLContext] makeCurrentContext];
 	CGLLockContext([[self openGLContext] CGLContextObj]);
-    [renderer render:mesh];
+    //[renderer render:mesh];
+    
+    for(int i = 0; i < meshes.size(); i++) {
+        [renderer render:meshes[i]];
+    }
     
     
 	CGLFlushDrawable([[self openGLContext] CGLContextObj]);

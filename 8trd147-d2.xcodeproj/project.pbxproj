@@ -16,7 +16,6 @@
 		B123563F18C376B900D5EC60 /* windowcontroller.mm in Sources */ = {isa = PBXBuildFile; fileRef = B123563918C376B900D5EC60 /* windowcontroller.mm */; };
 		B123564018C376B900D5EC60 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B123563B18C376B900D5EC60 /* main.m */; };
 		B123565518C376FB00D5EC60 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B123565118C376FB00D5EC60 /* MainMenu.xib */; };
-		B123565618C376FB00D5EC60 /* 8trd147-d2-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B123565218C376FB00D5EC60 /* 8trd147-d2-Info.plist */; };
 		B123565718C376FB00D5EC60 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B123565318C376FB00D5EC60 /* InfoPlist.strings */; };
 		B132F6E818C37B700020FC7D /* imageutil.mm in Sources */ = {isa = PBXBuildFile; fileRef = B132F6E018C37B700020FC7D /* imageutil.mm */; };
 		B132F6E918C37B700020FC7D /* matrixutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B132F6E218C37B700020FC7D /* matrixutil.cpp */; };
@@ -220,7 +219,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0700;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "8trd147-d2" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -287,7 +286,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -299,6 +297,7 @@
 				INFOPLIST_FILE = "resources/8trd147-d2-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.yc.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "8trd147-d2";
 			};
 			name = Debug;
@@ -307,7 +306,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
@@ -317,6 +315,7 @@
 				INFOPLIST_FILE = "resources/8trd147-d2-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.yc.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "8trd147-d2";
 			};
 			name = Release;
@@ -324,7 +323,7 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "DEBUG=1";
@@ -338,7 +337,6 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

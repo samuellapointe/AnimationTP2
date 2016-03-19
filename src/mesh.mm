@@ -332,6 +332,49 @@ bool CMesh::ReadPLY(std::ifstream& f_in)
     return true;
 }
 
+void CMesh::CreateRectangle() {
+    CPoint3D depart = CPoint3D(-8, 0, 2);
+    CPoint3D arrivee = CPoint3D(0, 0, 8);
+    
+    int tailleVerticale = 3;
+    int tailleHorizontale = 3;
+    
+    for (int i = 0; i < tailleVerticale; i++) {
+        for (int j = 0; j < tailleHorizontale; j++) {
+            int index = tailleVerticale*i + j;
+            int x = depart[0] + ((arrivee[0]-depart[0])/(tailleHorizontale-1))*j;
+            int y = depart[1];
+            int z = depart[2] + ((arrivee[2]-depart[2])/(tailleVerticale-1))*i;
+            vertices.push_back(new CVertex(index, CPoint3D(x, y, z), 0.0, 0.0));
+        }
+    }
+    
+    int nbQuads = (tailleHorizontale-1)*(tailleVerticale-1);
+    
+    for (int i = 0; i < tailleVerticale-1; i++) {
+        for (int j = 0; j < tailleHorizontale-1; j++) {
+            int index = tailleVerticale*i + j;
+            
+            CVertex* coinSupGauche = vertices[index];
+            CVertex* coinSupDroit = vertices[index+1];
+            CVertex* coinInfGauche = vertices[index+tailleHorizontale];
+            CVertex* coinInfDroit = vertices[index+tailleHorizontale+1];
+        
+            if (index % 2 == 0) {
+                triangles.push_back(new CTriangle(coinSupGauche, coinInfGauche, coinSupDroit));
+                triangles.push_back(new CTriangle(coinSupDroit, coinInfGauche, coinInfDroit));
+            } else {
+                triangles.push_back(new CTriangle(coinSupGauche, coinInfGauche, coinInfDroit));
+                triangles.push_back(new CTriangle(coinSupGauche, coinInfDroit, coinSupDroit));
+            }
+        }
+    }
+    
+    
+    UpdateNormals();
+    AllocVBOData();
+}
+
 
 void CMesh::Draw(GLint prog)
 {
