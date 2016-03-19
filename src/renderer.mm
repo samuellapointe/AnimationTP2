@@ -56,6 +56,7 @@ GLuint shader_prog_name;
 GLint uniform_mvp_matrix_idx;
 GLint uniform_model_view_matrix_idx;
 GLint uniform_normal_matrix_idx;
+GLint uniform_simulation_time_idx;
 
 GLfloat light_pos[] = {0.0, 30.0, 30.0};
 GLfloat mat_ambiant[] = {0.2, 0.2, 0.2};
@@ -228,10 +229,12 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
         shader_source_data *vtxSource = NULL;
 		shader_source_data *frgSource = NULL;
 		
-		file_path_name = [[NSBundle mainBundle] pathForResource:@"generic" ofType:@"vsh"];
+        // Mic: J'ai changé le vertex shader de generic à drap pour le tester en attendant de l'appliquer
+		file_path_name = [[NSBundle mainBundle] pathForResource:@"drap" ofType:@"vsh"];
 		vtxSource = shader_source_load([file_path_name cStringUsingEncoding:NSASCIIStringEncoding]);
 		
-		file_path_name = [[NSBundle mainBundle] pathForResource:@"generic" ofType:@"fsh"];
+        // Mic: J'ai changé le fragment shader de generic à drap pour le tester en attendant de l'appliquer
+		file_path_name = [[NSBundle mainBundle] pathForResource:@"drap" ofType:@"fsh"];
 		frgSource = shader_source_load([file_path_name cStringUsingEncoding:NSASCIIStringEncoding]);
 		
 		shader_prog_name = [self build_prog:vtxSource with_fragment_src:frgSource];
@@ -243,6 +246,7 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
         uniform_mvp_matrix_idx = glGetUniformLocation(shader_prog_name, "modelview_proj_matrix");
         uniform_model_view_matrix_idx = glGetUniformLocation(shader_prog_name, "modelview_matrix");
         uniform_normal_matrix_idx = glGetUniformLocation(shader_prog_name, "normal_matrix");
+        uniform_simulation_time_idx = glGetUniformLocation(shader_prog_name, "simulation_time");
 
         shader_source_destroy(vtxSource);
         shader_source_destroy(frgSource);
@@ -301,7 +305,7 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
 }
 
 
-
+GLfloat simulation_time = 0;
 - (void)render:(CMesh*)mesh
 {
     GLfloat viewdir_matrix[16];        // Matrice sans la translation (pour le cube map et le skybox).
@@ -310,6 +314,8 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
     GLfloat normal_matrix[9];    
     GLfloat mvp_matrix[16];
     GLfloat vp_matrix[16];
+    
+    simulation_time += 0.1;
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
@@ -341,6 +347,8 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
         glUniformMatrix3fv(uniform_normal_matrix_idx, 1, GL_FALSE, normal_matrix);
         //glUniformMatrix3fv(uniform_viewdir_matrix_idx, 1, GL_FALSE, viewdir_matrix);
         glUniformMatrix4fv(uniform_mvp_matrix_idx, 1, GL_FALSE, mvp_matrix);
+        
+        glUniform1f(uniform_simulation_time_idx, simulation_time);
         
         GLuint loc = glGetUniformLocation(shader_prog_name, "light_pos");
         glUniform3f(loc, light_pos[0], light_pos[1], light_pos[2]);

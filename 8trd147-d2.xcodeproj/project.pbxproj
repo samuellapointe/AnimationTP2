@@ -29,6 +29,8 @@
 		B1D0C7DB1A289DF9007E1C2A /* mesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = B1D0C7D71A289DF9007E1C2A /* mesh.mm */; };
 		B1D0C7DC1A289DF9007E1C2A /* point3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1D0C7D91A289DF9007E1C2A /* point3d.cpp */; };
 		B1E1E2F51A3A3FA100386427 /* mur.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B1E1E2F21A3A3FA100386427 /* mur.jpg */; };
+		EC6AB9521C9D87F900F9DDCE /* drap.fsh in Resources */ = {isa = PBXBuildFile; fileRef = EC6AB9501C9D87F900F9DDCE /* drap.fsh */; settings = {ASSET_TAGS = (); }; };
+		EC6AB9531C9D87F900F9DDCE /* drap.vsh in Resources */ = {isa = PBXBuildFile; fileRef = EC6AB9511C9D87F900F9DDCE /* drap.vsh */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,8 @@
 		B1D0C7D91A289DF9007E1C2A /* point3d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = point3d.cpp; path = src/point3d.cpp; sourceTree = "<group>"; };
 		B1D0C7DA1A289DF9007E1C2A /* point3d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = point3d.h; path = src/point3d.h; sourceTree = "<group>"; };
 		B1E1E2F21A3A3FA100386427 /* mur.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mur.jpg; path = models/mur.jpg; sourceTree = "<group>"; };
+		EC6AB9501C9D87F900F9DDCE /* drap.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = drap.fsh; path = shaders/drap.fsh; sourceTree = "<group>"; };
+		EC6AB9511C9D87F900F9DDCE /* drap.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = drap.vsh; path = shaders/drap.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +175,8 @@
 		3A1598C211B9DD84001E7AB5 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
+				EC6AB9501C9D87F900F9DDCE /* drap.fsh */,
+				EC6AB9511C9D87F900F9DDCE /* drap.vsh */,
 				3A1598E011B9DDF3001E7AB5 /* generic.vsh */,
 				3A1598E111B9DDF3001E7AB5 /* generic.fsh */,
 			);
@@ -246,7 +252,9 @@
 				3A1598E411B9DDF3001E7AB5 /* generic.vsh in Resources */,
 				3A1598E511B9DDF3001E7AB5 /* generic.fsh in Resources */,
 				B123565618C376FB00D5EC60 /* 8trd147-d2-Info.plist in Resources */,
+				EC6AB9531C9D87F900F9DDCE /* drap.vsh in Resources */,
 				B123565518C376FB00D5EC60 /* MainMenu.xib in Resources */,
+				EC6AB9521C9D87F900F9DDCE /* drap.fsh in Resources */,
 				B123565718C376FB00D5EC60 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
