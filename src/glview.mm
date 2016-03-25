@@ -139,6 +139,13 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
     CRectangle* rectangle = new CRectangle(8, 4, 30, 30);
     rectangle->set_diffuse_tex_id(gl_load_texture2D([file_path_name cStringUsingEncoding:NSUTF8StringEncoding]));
     meshes.push_back(rectangle);
+    
+    CCylindre* cylindre1 = new CCylindre(3,0.2,6,-2,0,0);
+    meshes.push_back(cylindre1);
+    
+    
+    CCylindre* cylindre2 = new CCylindre(3,0.2,6,2,0,0);
+    meshes.push_back(cylindre2);
 
     GetGLError();
 }
