@@ -69,7 +69,7 @@
 		B1D0C7DA1A289DF9007E1C2A /* point3d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = point3d.h; path = src/point3d.h; sourceTree = "<group>"; };
 		B1E1E2F21A3A3FA100386427 /* mur.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mur.jpg; path = models/mur.jpg; sourceTree = "<group>"; };
 		EC2168351CA572CA00B81F83 /* rectangle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = rectangle.mm; path = src/rectangle.mm; sourceTree = "<group>"; };
-		EC2168371CA572F500B81F83 /* rectangle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rectangle.h; sourceTree = "<group>"; };
+		EC2168381CA579D700B81F83 /* rectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rectangle.h; path = src/rectangle.h; sourceTree = "<group>"; };
 		EC6AB9501C9D87F900F9DDCE /* drap.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = drap.fsh; path = shaders/drap.fsh; sourceTree = "<group>"; };
 		EC6AB9511C9D87F900F9DDCE /* drap.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = drap.vsh; path = shaders/drap.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,10 +91,10 @@
 		080E96DDFE201D6D7F000001 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				EC2168381CA579D700B81F83 /* rectangle.h */,
 				B1D0C7D81A289DF9007E1C2A /* mesh.h */,
 				B1D0C7D71A289DF9007E1C2A /* mesh.mm */,
 				EC2168351CA572CA00B81F83 /* rectangle.mm */,
-				EC2168371CA572F500B81F83 /* rectangle.h */,
 				B1D0C7DA1A289DF9007E1C2A /* point3d.h */,
 				B1D0C7D91A289DF9007E1C2A /* point3d.cpp */,
 				B123563718C376B900D5EC60 /* glview.h */,
