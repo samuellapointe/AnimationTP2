@@ -125,18 +125,19 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
     [self setPixelFormat:pf];
     [self setOpenGLContext:context];
     
-    /*NSString* file_path_name = nil;
+    NSString* file_path_name = nil;
         
     file_path_name = [[NSBundle mainBundle] pathForResource:@"model" ofType:@"ply"];
-    [self load_mesh:[file_path_name cStringUsingEncoding:NSUTF8StringEncoding]];
+    //[self load_mesh:[file_path_name cStringUsingEncoding:NSUTF8StringEncoding]];
     
     NSURL* url = [[NSBundle mainBundle] resourceURL];
     file_path_name = [url path];
     
     file_path_name = [[NSBundle mainBundle] pathForResource:@"texture" ofType:@"jpg"];
-    mesh->set_diffuse_tex_id(gl_load_texture2D([file_path_name cStringUsingEncoding:NSUTF8StringEncoding]));*/
+    //mesh->set_diffuse_tex_id(gl_load_texture2D([file_path_name cStringUsingEncoding:NSUTF8StringEncoding]));
     
     CRectangle* rectangle = new CRectangle(8, 4, 30, 30);
+    rectangle->set_diffuse_tex_id(gl_load_texture2D([file_path_name cStringUsingEncoding:NSUTF8StringEncoding]));
     meshes.push_back(rectangle);
     
     GetGLError();
@@ -285,6 +286,10 @@ NSString* choose_image_file()
     
     //mesh->delete_diffuse_tex();
     //mesh->set_diffuse_tex_id(gl_load_texture2D([fname cStringUsingEncoding:NSUTF8StringEncoding]));
+    for(int i = 0; i < meshes.size(); i++) {
+        meshes[i]->delete_diffuse_tex();
+        meshes[i]->set_diffuse_tex_id(gl_load_texture2D([fname cStringUsingEncoding:NSUTF8StringEncoding]));
+    }
 
     [self draw_view];
 }

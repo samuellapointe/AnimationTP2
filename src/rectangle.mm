@@ -19,17 +19,40 @@ void CRectangle::CreateRectangle(int sizeH, int sizeV, int resH, int resV) {
     CPoint3D depart = CPoint3D(-sizeH/2, 0, -sizeV/2);
     CPoint3D arrivee = CPoint3D(sizeH/2, 0, sizeV/2);
     
+    float xmin = HUGE_VAL, xmax = -HUGE_VAL, ymin = HUGE_VAL, ymax=-HUGE_VAL;
+    
     //Pour chaque ligne de points
     for (int i = 0; i < resV; i++) {
         //Pour chaque point sur cette ligne
         for (int j = 0; j < resH; j++) {
-            //Créer le sommer
+            //Créer le sommet
             int index = resV*i + j;
-            int x = depart[0] + ((arrivee[0]-depart[0])/(resH-1))*j;
-            int y = depart[1];
-            int z = depart[2] + ((arrivee[2]-depart[2])/(resV-1))*i;
+            float x = depart[0] + ((arrivee[0]-depart[0])/(resH-1))*j;
+            float y = depart[1];
+            float z = depart[2] + ((arrivee[2]-depart[2])/(resV-1))*i;
             vertices.push_back(new CVertex(index, CPoint3D(x, y, z), 0.0, 0.0));
+            
+            if ( xmin > x ) xmin = x;
+            if ( ymin > z ) ymin = z;
+            if ( xmax < x ) xmax = x;
+            if ( ymax < z ) ymax = z;
         }
+    }
+    
+    // Coordonnées uv de base.
+    for (int i=0; i<vertices.size(); i++ )
+    {
+        float x = (*vertices[i])[0];
+        float y = (*vertices[i])[2];
+        
+        float u = (x-xmin)/(xmax - xmin);
+        float v = (y-ymin)/(ymax - ymin);
+        
+        vertices[i]->u = u;
+        vertices[i]->v = v;
+        
+        int j = 0;
+        
     }
     
     //Pour chaque ligne, sauf la dernière
@@ -58,6 +81,7 @@ void CRectangle::CreateRectangle(int sizeH, int sizeV, int resH, int resV) {
                 triangles.push_back(new CTriangle(cornerTopLeft, cornerBottomLeft, cornerBottomRight));
                 triangles.push_back(new CTriangle(cornerTopLeft, cornerBottomRight, cornerTopRight));
             }
+            
         }
     }
     
