@@ -92,7 +92,7 @@ public:
     void    AllocVBOData();
     void    Draw(GLint prog);
     
-    void    set_diffuse_tex_id(GLint id) { diffuse_tex_id = id; }
+    void    set_diffuse_tex_id(GLint id) { diffuse_tex_id = id; std::cout << id << " -----\n";}
     GLint   get_diffuse_tex_id() const { return diffuse_tex_id; }
     
     void    delete_diffuse_tex() { glDeleteTextures(1, &diffuse_tex_id); }

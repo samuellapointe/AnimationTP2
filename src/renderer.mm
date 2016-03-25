@@ -317,8 +317,6 @@ GLfloat simulation_time = 0;
     
     simulation_time += 0.1;
     
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
     mtxLoadPerspective(projection_matrix, 50, (float)view_width/ (float)view_height, 1.0, 100.0);
     mtxLoadTranslate(model_view_matrix, 0, 0.0, camposz);
     mtxRotateXApply(model_view_matrix, rotx);
@@ -360,6 +358,9 @@ GLfloat simulation_time = 0;
     }
 }
 
-
+- (void)clear
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
 
 @end

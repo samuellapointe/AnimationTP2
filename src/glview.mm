@@ -376,6 +376,7 @@ static const float rot_factor = 0.25;
 	CGLLockContext([[self openGLContext] CGLContextObj]);
     //[renderer render:mesh];
     
+    [renderer clear];
     for(int i = 0; i < meshes.size(); i++) {
         [renderer render:meshes[i]];
     }
