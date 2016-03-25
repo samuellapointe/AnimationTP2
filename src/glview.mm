@@ -4,7 +4,7 @@
 
 #include "mesh.h"
 #include "rectangle.h"
-
+#include "cylindre.h"
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
@@ -139,7 +139,7 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
     CRectangle* rectangle = new CRectangle(8, 4, 30, 30);
     rectangle->set_diffuse_tex_id(gl_load_texture2D([file_path_name cStringUsingEncoding:NSUTF8StringEncoding]));
     meshes.push_back(rectangle);
-    
+
     GetGLError();
 }
 

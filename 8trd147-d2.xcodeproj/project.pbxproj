@@ -31,6 +31,7 @@
 		EC2168361CA572CA00B81F83 /* rectangle.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC2168351CA572CA00B81F83 /* rectangle.mm */; settings = {ASSET_TAGS = (); }; };
 		EC6AB9521C9D87F900F9DDCE /* drap.fsh in Resources */ = {isa = PBXBuildFile; fileRef = EC6AB9501C9D87F900F9DDCE /* drap.fsh */; settings = {ASSET_TAGS = (); }; };
 		EC6AB9531C9D87F900F9DDCE /* drap.vsh in Resources */ = {isa = PBXBuildFile; fileRef = EC6AB9511C9D87F900F9DDCE /* drap.vsh */; settings = {ASSET_TAGS = (); }; };
+		EC958D091CA58CC100F90343 /* cylindre.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC958D081CA58CC100F90343 /* cylindre.mm */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,8 @@
 		EC2168381CA579D700B81F83 /* rectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rectangle.h; path = src/rectangle.h; sourceTree = "<group>"; };
 		EC6AB9501C9D87F900F9DDCE /* drap.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = drap.fsh; path = shaders/drap.fsh; sourceTree = "<group>"; };
 		EC6AB9511C9D87F900F9DDCE /* drap.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = drap.vsh; path = shaders/drap.vsh; sourceTree = "<group>"; };
+		EC958D081CA58CC100F90343 /* cylindre.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = cylindre.mm; path = src/cylindre.mm; sourceTree = "<group>"; };
+		EC958D0D1CA5ACC000F90343 /* cylindre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cylindre.h; path = src/cylindre.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +94,7 @@
 		080E96DDFE201D6D7F000001 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				EC958D0D1CA5ACC000F90343 /* cylindre.h */,
 				EC2168381CA579D700B81F83 /* rectangle.h */,
 				B1D0C7D81A289DF9007E1C2A /* mesh.h */,
 				B1D0C7D71A289DF9007E1C2A /* mesh.mm */,
@@ -104,6 +108,7 @@
 				B123563A18C376B900D5EC60 /* windowcontroller.h */,
 				B123563918C376B900D5EC60 /* windowcontroller.mm */,
 				B123563B18C376B900D5EC60 /* main.m */,
+				EC958D081CA58CC100F90343 /* cylindre.mm */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 				B132F6E918C37B700020FC7D /* matrixutil.cpp in Sources */,
 				B1CCD1BE1A3A49FB0034DBFC /* vectorutil.cpp in Sources */,
 				B132F6EA18C37B700020FC7D /* sourceutil.cpp in Sources */,
+				EC958D091CA58CC100F90343 /* cylindre.mm in Sources */,
 				B1843C061A3CCB2500B2E033 /* glutil.cpp in Sources */,
 				B1D0C7DC1A289DF9007E1C2A /* point3d.cpp in Sources */,
 				B123563F18C376B900D5EC60 /* windowcontroller.mm in Sources */,
