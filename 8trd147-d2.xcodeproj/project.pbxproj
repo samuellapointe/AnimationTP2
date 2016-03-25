@@ -28,6 +28,7 @@
 		B1D0C7DB1A289DF9007E1C2A /* mesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = B1D0C7D71A289DF9007E1C2A /* mesh.mm */; };
 		B1D0C7DC1A289DF9007E1C2A /* point3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1D0C7D91A289DF9007E1C2A /* point3d.cpp */; };
 		B1E1E2F51A3A3FA100386427 /* mur.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B1E1E2F21A3A3FA100386427 /* mur.jpg */; };
+		EC2168361CA572CA00B81F83 /* rectangle.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC2168351CA572CA00B81F83 /* rectangle.mm */; settings = {ASSET_TAGS = (); }; };
 		EC6AB9521C9D87F900F9DDCE /* drap.fsh in Resources */ = {isa = PBXBuildFile; fileRef = EC6AB9501C9D87F900F9DDCE /* drap.fsh */; settings = {ASSET_TAGS = (); }; };
 		EC6AB9531C9D87F900F9DDCE /* drap.vsh in Resources */ = {isa = PBXBuildFile; fileRef = EC6AB9511C9D87F900F9DDCE /* drap.vsh */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
@@ -67,6 +68,8 @@
 		B1D0C7D91A289DF9007E1C2A /* point3d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = point3d.cpp; path = src/point3d.cpp; sourceTree = "<group>"; };
 		B1D0C7DA1A289DF9007E1C2A /* point3d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = point3d.h; path = src/point3d.h; sourceTree = "<group>"; };
 		B1E1E2F21A3A3FA100386427 /* mur.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mur.jpg; path = models/mur.jpg; sourceTree = "<group>"; };
+		EC2168351CA572CA00B81F83 /* rectangle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = rectangle.mm; path = src/rectangle.mm; sourceTree = "<group>"; };
+		EC2168371CA572F500B81F83 /* rectangle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rectangle.h; sourceTree = "<group>"; };
 		EC6AB9501C9D87F900F9DDCE /* drap.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = drap.fsh; path = shaders/drap.fsh; sourceTree = "<group>"; };
 		EC6AB9511C9D87F900F9DDCE /* drap.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = drap.vsh; path = shaders/drap.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +93,8 @@
 			children = (
 				B1D0C7D81A289DF9007E1C2A /* mesh.h */,
 				B1D0C7D71A289DF9007E1C2A /* mesh.mm */,
+				EC2168351CA572CA00B81F83 /* rectangle.mm */,
+				EC2168371CA572F500B81F83 /* rectangle.h */,
 				B1D0C7DA1A289DF9007E1C2A /* point3d.h */,
 				B1D0C7D91A289DF9007E1C2A /* point3d.cpp */,
 				B123563718C376B900D5EC60 /* glview.h */,
@@ -250,7 +255,6 @@
 				B1E1E2F51A3A3FA100386427 /* mur.jpg in Resources */,
 				3A1598E411B9DDF3001E7AB5 /* generic.vsh in Resources */,
 				3A1598E511B9DDF3001E7AB5 /* generic.fsh in Resources */,
-				B123565618C376FB00D5EC60 /* 8trd147-d2-Info.plist in Resources */,
 				EC6AB9531C9D87F900F9DDCE /* drap.vsh in Resources */,
 				B123565518C376FB00D5EC60 /* MainMenu.xib in Resources */,
 				EC6AB9521C9D87F900F9DDCE /* drap.fsh in Resources */,
@@ -268,6 +272,7 @@
 				B132F6E818C37B700020FC7D /* imageutil.mm in Sources */,
 				B123564018C376B900D5EC60 /* main.m in Sources */,
 				B1D0C7DB1A289DF9007E1C2A /* mesh.mm in Sources */,
+				EC2168361CA572CA00B81F83 /* rectangle.mm in Sources */,
 				B123563D18C376B900D5EC60 /* glview.mm in Sources */,
 				B123563E18C376B900D5EC60 /* renderer.mm in Sources */,
 				B132F6E918C37B700020FC7D /* matrixutil.cpp in Sources */,

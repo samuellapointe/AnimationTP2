@@ -91,7 +91,6 @@ public:
     bool    ReadPLY(std::ifstream&);    
     void    AllocVBOData();
     void    Draw(GLint prog);
-    void    CreateRectangle();
     
     void    set_diffuse_tex_id(GLint id) { diffuse_tex_id = id; }
     GLint   get_diffuse_tex_id() const { return diffuse_tex_id; }

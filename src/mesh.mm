@@ -332,54 +332,6 @@ bool CMesh::ReadPLY(std::ifstream& f_in)
     return true;
 }
 
-void CMesh::CreateRectangle() {
-    //Taille du mesh
-    int tailleVerticale = 16;
-    int tailleHorizontale = 8;
-    
-    //Nombre de triangles
-    int resolutionVerticale = 30;
-    int resolutionHorizontale = 30;
-    
-    //Coins opposés, le centre est au point 0.
-    CPoint3D depart = CPoint3D(-tailleHorizontale/2, 0, -tailleVerticale/2);
-    CPoint3D arrivee = CPoint3D(tailleHorizontale/2, 0, tailleVerticale/2);
-    
-    for (int i = 0; i < resolutionVerticale; i++) {
-        for (int j = 0; j < resolutionHorizontale; j++) {
-            int index = resolutionVerticale*i + j;
-            int x = depart[0] + ((arrivee[0]-depart[0])/(resolutionHorizontale-1))*j;
-            int y = depart[1];
-            int z = depart[2] + ((arrivee[2]-depart[2])/(resolutionVerticale-1))*i;
-            vertices.push_back(new CVertex(index, CPoint3D(x, y, z), 0.0, 0.0));
-        }
-    }
-    
-    for (int i = 0; i < resolutionVerticale-1; i++) {
-        for (int j = 0; j < resolutionHorizontale-1; j++) {
-            int index = resolutionVerticale*i + j;
-            
-            CVertex* coinSupGauche = vertices[index];
-            CVertex* coinSupDroit = vertices[index+1];
-            CVertex* coinInfGauche = vertices[index+resolutionHorizontale];
-            CVertex* coinInfDroit = vertices[index+resolutionHorizontale+1];
-        
-            if (index % 2 == 0) {
-                triangles.push_back(new CTriangle(coinSupGauche, coinInfGauche, coinSupDroit));
-                triangles.push_back(new CTriangle(coinSupDroit, coinInfGauche, coinInfDroit));
-            } else {
-                triangles.push_back(new CTriangle(coinSupGauche, coinInfGauche, coinInfDroit));
-                triangles.push_back(new CTriangle(coinSupGauche, coinInfDroit, coinSupDroit));
-            }
-        }
-    }
-    
-    
-    UpdateNormals();
-    AllocVBOData();
-}
-
-
 void CMesh::Draw(GLint prog)
 {
     attrib_position = glGetAttribLocation(prog, "pos");

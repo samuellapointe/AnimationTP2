@@ -3,6 +3,7 @@
 #import "renderer.h"
 
 #include "mesh.h"
+#include "rectangle.h"
 
 #include <stdio.h>
 #include <iostream>
@@ -135,9 +136,8 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
     file_path_name = [[NSBundle mainBundle] pathForResource:@"texture" ofType:@"jpg"];
     mesh->set_diffuse_tex_id(gl_load_texture2D([file_path_name cStringUsingEncoding:NSUTF8StringEncoding]));*/
     
-    CMesh* mesh = new CMesh();
-    mesh->CreateRectangle();
-    meshes.push_back(mesh);
+    CRectangle* rectangle = new CRectangle(8, 4, 30, 30);
+    meshes.push_back(rectangle);
     
     GetGLError();
 }
