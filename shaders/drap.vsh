@@ -19,12 +19,30 @@ out vec3 N;
 out vec3 V;
 out vec3 var_light_pos;
 
-#define h 0.001
+#define h 0.0001
 
+/*
 vec4 f(vec4 position, float t)
 {
     vec4 value = vec4(position.x, (1*sin(position.x + t)) + position.y, position.z, position.w);
     return value;
+}
+*/
+float f(float x, float y, float t)
+{
+    float value = 1*sin(x + 0.1*t) + y;
+    return value;
+}
+vec4 rotate(vec4 position, float angle)
+{
+    mat4 rotation;
+    rotation[0] = vec4(1.0, 0.0, 0.0, 0.0);
+    rotation[1] = vec4(0, cos(angle), sin(angle), 0);
+    rotation[2] = vec4(0, -sin(angle), cos(angle), 0);
+    rotation[3] = vec4(0, 0, 0, 1);
+    
+    position = position * rotation;
+    return position;
 }
 
 void main (void)
@@ -35,13 +53,19 @@ void main (void)
     V = normalize(vec3(modelview_matrix*pos));
     var_light_pos = normal_matrix*light_pos;
     
-    vec4 position_deplacee = modelview_proj_matrix*f(pos, simulation_time);
+    float angle = -pow(2, (-0.25 * pow((-5+0.1*simulation_time), 2))) - 0.25;
+    
+    vec4 position_deplacee = modelview_proj_matrix*rotate(pos, angle) + vec4(0, f(pos.x, pos.y, simulation_time), 0, 0);
     gl_Position = position_deplacee;
     
+    V = normalize(vec3(modelview_matrix*position_deplacee));
+    
     // Calcul de la nouvelle normale - Non fonctionnel
-    vec4 fx = (f(vec4(pos.x + h, pos.y, 0, 0), simulation_time) - f(pos, simulation_time))/h;
-    vec4 fy = (f(vec4(pos.x, pos.y + h, -100, 0), simulation_time) - f(pos, simulation_time))/h;
-    N = normalize(cross(fx.xyz, fy.xyz));
+    vec4 fx = vec4(f(pos.x + h, pos.y, simulation_time), 1, 1, 0);
+    vec4 fy = vec4(1, f(pos.x, pos.y + h, simulation_time), 1, 0);
+    //vec4 fx = (f(vec4(pos.x + h, pos.y, pos.z, 0), simulation_time) - f(pos, simulation_time))/h;
+    //vec4 fy = (f(vec4(pos.x, pos.y + h, pos.z, 0), simulation_time) - f(pos, simulation_time))/h;
+    N = normalize(N + cross(fx.xyz, fy.xyz));
 }
 
 
