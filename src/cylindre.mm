@@ -10,9 +10,9 @@
 #include "math.h"
 
 
-void CCylindre::CreateCylindre(double hauteur, double rayon, int nbCote, double transX, double transY, double transZ){
-    CPoint3D pointMilieuHaut = CPoint3D(transX,hauteur+transY,transZ);
-    CPoint3D pointMilieuBas = CPoint3D(transX,transY,transZ);
+void CCylindre::CreateCylindre(double hauteur, double rayon, int nbCote, double transX){
+    CPoint3D pointMilieuHaut = CPoint3D(transX,hauteur,0);
+    CPoint3D pointMilieuBas = CPoint3D(transX,0,0);
     
     //L'angle qu'il faut se déplacer pour aller à un autre point du cercle dépendament du nombre de côtés
     double delta = 360/nbCote;
@@ -25,9 +25,9 @@ void CCylindre::CreateCylindre(double hauteur, double rayon, int nbCote, double 
         double leCos = cos((delta*i)*(M_PI/180));
         double leSin = sin((delta*i)*(M_PI/180));
         double x = rayon*leCos+transX;
-        double z = rayon*leSin+transZ;
-        double yH = hauteur+transY;
-        double yB = transY;
+        double z = rayon*leSin;
+        double yH = hauteur;
+        double yB = 0;
         
         vertices.push_back(new CVertex(indexH, CPoint3D(x,yH,z),0.0,0.0));
         vertices.push_back(new CVertex(indexB, CPoint3D(x,yB,z),0.0,0.0));

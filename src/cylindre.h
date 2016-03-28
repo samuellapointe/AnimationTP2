@@ -13,13 +13,13 @@
 
 class CCylindre : public CMesh {
 public:
-    CCylindre(double hauteur, double rayon, int nbCote, double transX, double transY, double transZ){
+    CCylindre(double hauteur, double rayon, int nbCote, double transX){
         CMesh();
-        CreateCylindre(hauteur, rayon, nbCote, transX, transY, transZ);
+        CreateCylindre(hauteur, rayon, nbCote, transX);
     }
     
 private:
-    void CreateCylindre(double hauteur, double rayon, int nbCote, double transX, double transY, double transZ);
+    void CreateCylindre(double hauteur, double rayon, int nbCote, double transX);
 };
 
 #endif /* cylindre_h */

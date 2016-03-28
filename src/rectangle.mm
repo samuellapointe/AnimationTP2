@@ -9,7 +9,7 @@
 #include "rectangle.h"
 
 
-void CRectangle::CreateRectangle(double sizeH, double sizeV, int resH, int resV, double transX, double transY, bool draps) {
+void CRectangle::CreateRectangle(double sizeH, double sizeV, int resH, int resV, bool draps) {
     //coins opposés, le centre est au point 0.
     CPoint3D depart = CPoint3D(-sizeH/2, 0, -sizeV/2);
     CPoint3D arrivee = CPoint3D(sizeH/2, 0, sizeV/2);
@@ -26,9 +26,9 @@ void CRectangle::CreateRectangle(double sizeH, double sizeV, int resH, int resV,
             float y = depart[1];
             float z = depart[2] + ((arrivee[2]-depart[2])/(resV-1))*i;
             if(draps == false)
-                vertices.push_back(new CVertex(index, CPoint3D(x + transX, y + transY, z), 0.0, 0.0));
+                vertices.push_back(new CVertex(index, CPoint3D(x, y, z), 0.0, 0.0));
             else
-                vertices.push_back(new CVertex(index, CPoint3D(z + transX, x + transY, y), 0.0, 0.0));
+                vertices.push_back(new CVertex(index, CPoint3D(z, x, y), 0.0, 0.0));
             
             if ( xmin > x ) xmin = x;
             if ( ymin > z ) ymin = z;

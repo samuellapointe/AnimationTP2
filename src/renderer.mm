@@ -228,15 +228,13 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
 		
         shader_source_data *vtxSource = NULL;
 		shader_source_data *frgSource = NULL;
-		
-        // Mic: J'ai changé le vertex shader de generic à drap pour le tester en attendant de l'appliquer
-		file_path_name = [[NSBundle mainBundle] pathForResource:@"drap" ofType:@"vsh"];
-		vtxSource = shader_source_load([file_path_name cStringUsingEncoding:NSASCIIStringEncoding]);
-		
-        // Mic: J'ai changé le fragment shader de generic à drap pour le tester en attendant de l'appliquer
-		file_path_name = [[NSBundle mainBundle] pathForResource:@"drap" ofType:@"fsh"];
-		frgSource = shader_source_load([file_path_name cStringUsingEncoding:NSASCIIStringEncoding]);
-		
+        
+        file_path_name = [[NSBundle mainBundle] pathForResource:@"generic" ofType:@"vsh"];
+        vtxSource = shader_source_load([file_path_name cStringUsingEncoding:NSASCIIStringEncoding]);
+        
+        file_path_name = [[NSBundle mainBundle] pathForResource:@"generic" ofType:@"fsh"];
+        frgSource = shader_source_load([file_path_name cStringUsingEncoding:NSASCIIStringEncoding]);
+        
 		shader_prog_name = [self build_prog:vtxSource with_fragment_src:frgSource];
 
         glUseProgram(shader_prog_name);
@@ -314,7 +312,7 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
     GLfloat vp_matrix[16];
     
     mtxLoadPerspective(projection_matrix, 50, (float)view_width/ (float)view_height, 1.0, 100.0);
-    mtxLoadTranslate(model_view_matrix, 0, 0.0, camposz);
+    mtxLoadTranslate(model_view_matrix, 0, -3, camposz);
     mtxRotateXApply(model_view_matrix, rotx);
     mtxRotateYApply(model_view_matrix, roty);
     mtxRotateZApply(model_view_matrix, rotz);
@@ -330,10 +328,11 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
     mtx3x3FromTopLeftOf4x4(normal_matrix, model_view_matrix);
     mtx3x3Invert(normal_matrix, normal_matrix);
     
+    
     if ( mesh )
     {
         glUseProgram(shader_prog_name);
-        
+
         glUniformMatrix4fv(uniform_mvp_matrix_idx, 1, GL_FALSE, mvp_matrix);
         glUniformMatrix4fv(uniform_model_view_matrix_idx, 1, GL_FALSE, model_view_matrix);
         glUniformMatrix3fv(uniform_normal_matrix_idx, 1, GL_FALSE, normal_matrix);
@@ -347,7 +346,6 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
         
         loc = glGetUniformLocation(shader_prog_name, "cam_pos");
         glUniform3f(loc, normal_matrix[6], normal_matrix[7], normal_matrix[8]);
-        
         mesh->Draw(shader_prog_name);
     }
 }

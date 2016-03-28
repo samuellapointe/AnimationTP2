@@ -13,13 +13,13 @@
 
 class CRectangle : public CMesh {
 public:
-    CRectangle(double sizeH, double sizeV, int resH, int resV, double transX,double transY, bool draps = false){
+    CRectangle(double sizeH, double sizeV, int resH, int resV, bool draps = false){
         CMesh();
-        CreateRectangle(sizeH, sizeV, resH, resV, transX, transY, draps);
+        CreateRectangle(sizeH, sizeV, resH, resV, draps);
     }
     
 private:
-    void CreateRectangle(double sizeH, double sizeV, int resH, int resV, double transX, double transy, bool draps);
+    void CreateRectangle(double sizeH, double sizeV, int resH, int resV, bool draps);
 
 };
 
