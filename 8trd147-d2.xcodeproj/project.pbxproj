@@ -95,20 +95,20 @@
 			isa = PBXGroup;
 			children = (
 				EC958D0D1CA5ACC000F90343 /* cylindre.h */,
-				EC2168381CA579D700B81F83 /* rectangle.h */,
-				B1D0C7D81A289DF9007E1C2A /* mesh.h */,
-				B1D0C7D71A289DF9007E1C2A /* mesh.mm */,
-				EC2168351CA572CA00B81F83 /* rectangle.mm */,
-				B1D0C7DA1A289DF9007E1C2A /* point3d.h */,
-				B1D0C7D91A289DF9007E1C2A /* point3d.cpp */,
+				EC958D081CA58CC100F90343 /* cylindre.mm */,
 				B123563718C376B900D5EC60 /* glview.h */,
 				B123563518C376B900D5EC60 /* glview.mm */,
+				B123563B18C376B900D5EC60 /* main.m */,
+				B1D0C7D81A289DF9007E1C2A /* mesh.h */,
+				B1D0C7D71A289DF9007E1C2A /* mesh.mm */,
+				B1D0C7D91A289DF9007E1C2A /* point3d.cpp */,
+				B1D0C7DA1A289DF9007E1C2A /* point3d.h */,
+				EC2168381CA579D700B81F83 /* rectangle.h */,
+				EC2168351CA572CA00B81F83 /* rectangle.mm */,
 				B123563818C376B900D5EC60 /* renderer.h */,
 				B123563618C376B900D5EC60 /* renderer.mm */,
 				B123563A18C376B900D5EC60 /* windowcontroller.h */,
 				B123563918C376B900D5EC60 /* windowcontroller.mm */,
-				B123563B18C376B900D5EC60 /* main.m */,
-				EC958D081CA58CC100F90343 /* cylindre.mm */,
 			);
 			name = src;
 			sourceTree = "<group>";

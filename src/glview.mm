@@ -140,8 +140,10 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
     
     //mesh->set_diffuse_tex_id(gl_load_texture2D([file_path_name cStringUsingEncoding:NSUTF8StringEncoding]));
     
+
     //Rectangle du drap (Hauteur, largeur, resolutionX, resolutionY, Bool (Drap et non plancher))
     CRectangle* rectangle = new CRectangle(3, 4, 40, 30, true);
+    
     rectangle->set_diffuse_tex_id(gl_load_texture2D([file_texture1 cStringUsingEncoding:NSUTF8StringEncoding]));
     dynamic_meshes.push_back(rectangle);
     
