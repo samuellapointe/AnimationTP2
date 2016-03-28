@@ -30,7 +30,7 @@ vec4 f(vec4 position, float t)
 */
 float f(float x, float y, float t)
 {
-    float value = sin(0.9 * x + t) * cos(0.9 * y + t) * 0.85;
+    float value = sin(2.9 * x + t) * cos(1.4 * y + 2*t) * 0.2;
     return value;
 }
 vec4 rotate(vec4 position, float angle)
@@ -59,7 +59,7 @@ void main (void)
     vec4 new = pos;
     
     //Limiter la vague pour que le bas soit plus affecté
-    new.z = ((new.y - 1.5)/(3 - 1.5)) * f(new.x, new.y, simulation_time);
+    new.z = ((new.y - 1.5)/(3 - 1.5)) * ((angle + 0.2)/(0.8 - 0.2)) * f(new.x, new.y, simulation_time);
     
     vec4 translationBeforeRotation = vec4(0.0, -1.5, 0.0, 0); // Fixe l'extrémité pour la rotation.
     new += translationBeforeRotation;
