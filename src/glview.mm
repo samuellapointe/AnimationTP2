@@ -143,20 +143,20 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
     //Rectangle du drap (Hauteur, largeur, resolutionX, resolutionY, Bool (Drap et non plancher))
     CRectangle* rectangle = new CRectangle(3, 4, 40, 30, true);
     rectangle->set_diffuse_tex_id(gl_load_texture2D([file_texture1 cStringUsingEncoding:NSUTF8StringEncoding]));
-    meshes.push_back(rectangle);
+    dynamic_meshes.push_back(rectangle);
     
     //Rectangle du plancher(Longueur,profondeur, resolutionX, resolutionY)
     CRectangle* rectangle2 = new CRectangle(8, 8, 2, 2);
     rectangle2->set_diffuse_tex_id(gl_load_texture2D([file_texture2 cStringUsingEncoding:NSUTF8StringEncoding]));
-    meshes.push_back(rectangle2);
+    static_meshes.push_back(rectangle2);
     
     //Cylindre gauche (Hauteur, rayon, nombre de faces, translationX);
     CCylindre* cylindre1 = new CCylindre(6, 0.2, 6,-3);
-    meshes.push_back(cylindre1);
+    static_meshes.push_back(cylindre1);
     
     //Cylindre droit (Hauteur, rayon, nombre de faces, translationX);
     CCylindre* cylindre2 = new CCylindre(6, 0.2, 6, 3);
-    meshes.push_back(cylindre2);
+    static_meshes.push_back(cylindre2);
     
     GetGLError();
 }
@@ -304,10 +304,6 @@ NSString* choose_image_file()
     
     //mesh->delete_diffuse_tex();
     //mesh->set_diffuse_tex_id(gl_load_texture2D([fname cStringUsingEncoding:NSUTF8StringEncoding]));
-    for(int i = 0; i < meshes.size(); i++) {
-        meshes[i]->delete_diffuse_tex();
-        meshes[i]->set_diffuse_tex_id(gl_load_texture2D([fname cStringUsingEncoding:NSUTF8StringEncoding]));
-    }
 
     [self draw_view];
 }
@@ -399,8 +395,12 @@ static const float rot_factor = 0.25;
     //[renderer render:mesh];
     
     [renderer clear];
-    for(int i = 0; i < meshes.size(); i++) {
-        [renderer render:meshes[i] atSimulationTime:simulation_time];
+    for(int i = 0; i < static_meshes.size(); i++) {
+        [renderer render:static_meshes[i] atSimulationTime:simulation_time dynamic:false];
+    }
+    
+    for(int i = 0; i < dynamic_meshes.size(); i++) {
+        [renderer render:dynamic_meshes[i] atSimulationTime:simulation_time dynamic:true];
     }
     
     

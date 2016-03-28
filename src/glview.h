@@ -25,7 +25,8 @@ class CMesh;
     float time_interval;
     NSTimer*    frame_timer;
     
-    std::vector<CMesh*> meshes;
+    std::vector<CMesh*> static_meshes;
+    std::vector<CMesh*> dynamic_meshes;
 }
 
 

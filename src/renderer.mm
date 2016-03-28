@@ -52,10 +52,10 @@ enum {
 @implementation CRenderer
 
 // Variable globales (c'est pas idéal, mais c'est un prototype).
-GLuint shader_prog_name;
-GLint uniform_mvp_matrix_idx;
-GLint uniform_model_view_matrix_idx;
-GLint uniform_normal_matrix_idx;
+GLuint shader_prog_name[2];
+GLint uniform_mvp_matrix_idx[2];
+GLint uniform_model_view_matrix_idx[2];
+GLint uniform_normal_matrix_idx[2];
 GLint uniform_simulation_time_idx;
 
 GLfloat light_pos[] = {0.0, 30.0, 30.0};
@@ -228,32 +228,40 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
 		
         shader_source_data *vtxSource = NULL;
 		shader_source_data *frgSource = NULL;
-        
+
         file_path_name = [[NSBundle mainBundle] pathForResource:@"generic" ofType:@"vsh"];
         vtxSource = shader_source_load([file_path_name cStringUsingEncoding:NSASCIIStringEncoding]);
         
         file_path_name = [[NSBundle mainBundle] pathForResource:@"generic" ofType:@"fsh"];
         frgSource = shader_source_load([file_path_name cStringUsingEncoding:NSASCIIStringEncoding]);
         
-		shader_prog_name = [self build_prog:vtxSource with_fragment_src:frgSource];
-
-        glUseProgram(shader_prog_name);
-        GLuint loc = glGetUniformLocation(shader_prog_name, "tex_diffuse");
-        glUniform1i(loc, 0);
+		shader_prog_name[0] = [self build_prog:vtxSource with_fragment_src:frgSource];
         
-        uniform_mvp_matrix_idx = glGetUniformLocation(shader_prog_name, "modelview_proj_matrix");
-        uniform_model_view_matrix_idx = glGetUniformLocation(shader_prog_name, "modelview_matrix");
-        uniform_normal_matrix_idx = glGetUniformLocation(shader_prog_name, "normal_matrix");
-        uniform_simulation_time_idx = glGetUniformLocation(shader_prog_name, "simulation_time");
+        file_path_name = [[NSBundle mainBundle] pathForResource:@"drap" ofType:@"vsh"];
+        vtxSource = shader_source_load([file_path_name cStringUsingEncoding:NSASCIIStringEncoding]);
+        
+        file_path_name = [[NSBundle mainBundle] pathForResource:@"drap" ofType:@"fsh"];
+        frgSource = shader_source_load([file_path_name cStringUsingEncoding:NSASCIIStringEncoding]);
 
+        shader_prog_name[1] = [self build_prog:vtxSource with_fragment_src:frgSource];
+
+        for (int i = 0; i < 2; i++) {
+            glUseProgram(shader_prog_name[i]);
+            GLuint loc = glGetUniformLocation(shader_prog_name[i], "tex_diffuse");
+            glUniform1i(loc, 0);
+            
+            uniform_mvp_matrix_idx[i] = glGetUniformLocation(shader_prog_name[i], "modelview_proj_matrix");
+            uniform_model_view_matrix_idx[i] = glGetUniformLocation(shader_prog_name[i], "modelview_matrix");
+            uniform_normal_matrix_idx[i] = glGetUniformLocation(shader_prog_name[i], "normal_matrix");
+            uniform_simulation_time_idx = glGetUniformLocation(shader_prog_name[i], "simulation_time");
+            
+            glEnable(GL_DEPTH_TEST);
+            glEnable(GL_CULL_FACE);
+            glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+        }
+		
         shader_source_destroy(vtxSource);
         shader_source_destroy(frgSource);
-
-		glEnable(GL_DEPTH_TEST);
-        glEnable(GL_CULL_FACE);
-        glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-		
-		
  	}
 	
 	return self;
@@ -263,7 +271,9 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
 {
     // PATCH: Effacer les ressources ogl ici.
 	//glDeleteTextures(1, &tex_name);
-    glDeleteProgram(shader_prog_name);
+    for (int i = 0; i < 2; i++) {
+        glDeleteProgram(shader_prog_name[i]);
+    }
 }
 
 - (void) dealloc
@@ -277,32 +287,41 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
 
 -(void)set_diffuse_contrib:(float)val
 {
-    glUseProgram(shader_prog_name);
-    GLuint loc = glGetUniformLocation(shader_prog_name, "diffuse_contrib");
-    glUniform1f(loc, val);
+    for (int i = 0; i < 2; i++) {
+        glUseProgram(shader_prog_name[i]);
+        GLuint loc = glGetUniformLocation(shader_prog_name[i], "diffuse_contrib");
+        glUniform1f(loc, val);
+    }
 }
 
 -(void)set_ambiant_contrib:(float)val
 {
-    GLuint loc = glGetUniformLocation(shader_prog_name, "ambiant_contrib");
-    glUniform1f(loc, val);
+    for (int i = 0; i < 2; i++) {
+        glUseProgram(shader_prog_name[i]);
+        GLuint loc = glGetUniformLocation(shader_prog_name[i], "ambiant_contrib");
+        glUniform1f(loc, val);
+    }
 }
 
 -(void)set_spec_contrib:(float)val
 {
-    glUseProgram(shader_prog_name);
-    GLuint loc = glGetUniformLocation(shader_prog_name, "spec_contrib");
-    glUniform1f(loc, val);
+    for (int i = 0; i < 2; i++) {
+        glUseProgram(shader_prog_name[i]);
+        GLuint loc = glGetUniformLocation(shader_prog_name[i], "spec_contrib");
+        glUniform1f(loc, val);
+    }
 }
 
 -(void)set_mat_shininess:(float)val
 {
-    glUseProgram(shader_prog_name);
-    GLuint loc = glGetUniformLocation(shader_prog_name, "mat_shininess");
-    glUniform1f(loc, val);
+    for (int i = 0; i < 2; i++) {
+        glUseProgram(shader_prog_name[i]);
+        GLuint loc = glGetUniformLocation(shader_prog_name[i], "mat_shininess");
+        glUniform1f(loc, val);
+    }
 }
 
-- (void)render:(CMesh*)mesh atSimulationTime:(float)simulation_time
+- (void)render:(CMesh*)mesh atSimulationTime:(float)simulation_time dynamic:(bool)dynamic
 {
     GLfloat viewdir_matrix[16];        // Matrice sans la translation (pour le cube map et le skybox).
     GLfloat model_view_matrix[16];
@@ -331,22 +350,30 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
     
     if ( mesh )
     {
-        glUseProgram(shader_prog_name);
-
-        glUniformMatrix4fv(uniform_mvp_matrix_idx, 1, GL_FALSE, mvp_matrix);
-        glUniformMatrix4fv(uniform_model_view_matrix_idx, 1, GL_FALSE, model_view_matrix);
-        glUniformMatrix3fv(uniform_normal_matrix_idx, 1, GL_FALSE, normal_matrix);
+        int shaderNo;
+        
+        if (dynamic) {
+            shaderNo = 1;
+        } else {
+            shaderNo = 0;
+        }
+        cout << shaderNo;
+        glUseProgram(shader_prog_name[shaderNo]);
+        
+        glUniformMatrix4fv(uniform_mvp_matrix_idx[shaderNo], 1, GL_FALSE, mvp_matrix);
+        glUniformMatrix4fv(uniform_model_view_matrix_idx[shaderNo], 1, GL_FALSE, model_view_matrix);
+        glUniformMatrix3fv(uniform_normal_matrix_idx[shaderNo], 1, GL_FALSE, normal_matrix);
         //glUniformMatrix3fv(uniform_viewdir_matrix_idx, 1, GL_FALSE, viewdir_matrix);
-        glUniformMatrix4fv(uniform_mvp_matrix_idx, 1, GL_FALSE, mvp_matrix);
+        //glUniformMatrix4fv(uniform_mvp_matrix_idx, 1, GL_FALSE, mvp_matrix);
         
         glUniform1f(uniform_simulation_time_idx, simulation_time);
         
-        GLuint loc = glGetUniformLocation(shader_prog_name, "light_pos");
+        GLuint loc = glGetUniformLocation(shader_prog_name[shaderNo], "light_pos");
         glUniform3f(loc, light_pos[0], light_pos[1], light_pos[2]);
         
-        loc = glGetUniformLocation(shader_prog_name, "cam_pos");
+        loc = glGetUniformLocation(shader_prog_name[shaderNo], "cam_pos");
         glUniform3f(loc, normal_matrix[6], normal_matrix[7], normal_matrix[8]);
-        mesh->Draw(shader_prog_name);
+        mesh->Draw(shader_prog_name[shaderNo]);
     }
 }
 
