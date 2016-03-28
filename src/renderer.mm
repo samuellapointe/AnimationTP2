@@ -363,7 +363,6 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
         } else {
             shaderNo = 0;
         }
-        cout << shaderNo;
         glUseProgram(shader_prog_name[shaderNo]);
         
         glUniformMatrix4fv(uniform_mvp_matrix_idx[shaderNo], 1, GL_FALSE, mvp_matrix);

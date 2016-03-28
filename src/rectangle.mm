@@ -60,7 +60,6 @@ void CRectangle::CreateRectangle(double sizeH, double sizeV, int resH, int resV,
         vertices[i]->v = v;    
     }
     
-    std::cout << resV << " " << resH << "\n";
     //Pour chaque ligne, sauf la dernière
     for (int i = 0; i < resV-1; i++) {
         //Changer l'orientation de départ pour chaque ligne
