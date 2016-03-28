@@ -5,6 +5,7 @@
 #include "mesh.h"
 #include "rectangle.h"
 #include "cylindre.h"
+#include "corde.h"
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
@@ -158,6 +159,9 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
     //Cylindre droit (Hauteur, rayon, nombre de faces, translationX);
     CCylindre* cylindre2 = new CCylindre(6, 0.2, 6, 3);
     static_meshes.push_back(cylindre2);
+    
+    CCorde* corde = new CCorde(6,-3,6);
+    static_meshes.push_back(corde);
     
     GetGLError();
 }
@@ -401,7 +405,6 @@ static const float rot_factor = 0.25;
     for(int i = 0; i < static_meshes.size(); i++) {
         [renderer render:static_meshes[i] atSimulationTime:simulation_time dynamic:false];
     }
-    
     for(int i = 0; i < dynamic_meshes.size(); i++) {
         [renderer render:dynamic_meshes[i] atSimulationTime:simulation_time dynamic:true];
     }
