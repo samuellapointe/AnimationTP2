@@ -30,7 +30,7 @@ vec4 f(vec4 position, float t)
 */
 float f(float x, float y, float t)
 {
-    float value = 1*sin(x + 0.1*t) + y;
+    float value = 1*sin(x + t) + y;
     return value;
 }
 vec4 rotate(vec4 position, float angle)
@@ -53,7 +53,7 @@ void main (void)
     V = normalize(vec3(modelview_matrix*pos));
     var_light_pos = normal_matrix*light_pos;
     
-    float angle = -pow(2, (-0.25 * pow((-5+0.1*simulation_time), 2))) - 0.25;
+    float angle = -pow(2, (-0.25 * pow((-5+2*simulation_time), 2))) - 0.25;
     
     vec4 position_deplacee = modelview_proj_matrix*rotate(pos, angle) + vec4(0, f(pos.x, pos.y, simulation_time), 0, 0);
     gl_Position = position_deplacee;
