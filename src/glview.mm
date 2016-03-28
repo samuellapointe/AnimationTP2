@@ -12,7 +12,6 @@
 
 using namespace std;
 
-
 static
 NSArray* open_files(NSArray* filetype_ext)
 {
@@ -390,6 +389,8 @@ static const float rot_factor = 0.25;
 	[self draw_view];
 }
 
+
+
 - (void) draw_view
 {	 
 	[[self openGLContext] makeCurrentContext];
@@ -404,8 +405,6 @@ static const float rot_factor = 0.25;
     for(int i = 0; i < dynamic_meshes.size(); i++) {
         [renderer render:dynamic_meshes[i] atSimulationTime:simulation_time dynamic:true];
     }
-    
-    
     
 	CGLFlushDrawable([[self openGLContext] CGLContextObj]);
 	CGLUnlockContext([[self openGLContext] CGLContextObj]);
