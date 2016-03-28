@@ -126,26 +126,36 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
     [self setOpenGLContext:context];
     
     NSString* file_path_name = nil;
-        
+    NSString* file_texture1 = nil;
+    NSString* file_texture2 = nil;
+    
     file_path_name = [[NSBundle mainBundle] pathForResource:@"model" ofType:@"ply"];
     //[self load_mesh:[file_path_name cStringUsingEncoding:NSUTF8StringEncoding]];
     
     NSURL* url = [[NSBundle mainBundle] resourceURL];
     file_path_name = [url path];
     
-    file_path_name = [[NSBundle mainBundle] pathForResource:@"texture" ofType:@"jpg"];
+    file_texture1 = [[NSBundle mainBundle] pathForResource:@"texture" ofType:@"jpg"];
+    file_texture2 = [[NSBundle mainBundle] pathForResource:@"mur" ofType:@"jpg"];
+    
     //mesh->set_diffuse_tex_id(gl_load_texture2D([file_path_name cStringUsingEncoding:NSUTF8StringEncoding]));
     
-    CRectangle* rectangle = new CRectangle(8, 4, 30, 30);
-    rectangle->set_diffuse_tex_id(gl_load_texture2D([file_path_name cStringUsingEncoding:NSUTF8StringEncoding]));
+    CRectangle* rectangle = new CRectangle(4, 2, 30, 30, 0, 1, true);
+    rectangle->set_diffuse_tex_id(gl_load_texture2D([file_texture1 cStringUsingEncoding:NSUTF8StringEncoding]));
     meshes.push_back(rectangle);
     
-    CCylindre* cylindre1 = new CCylindre(3,0.2,6,-2,0,0);
+    CRectangle* rectangle2 = new CRectangle(8, 4, 30, 30,0,-3);
+    rectangle2->set_diffuse_tex_id(gl_load_texture2D([file_texture2 cStringUsingEncoding:NSUTF8StringEncoding]));
+    meshes.push_back(rectangle2);
+    
+    CCylindre* cylindre1 = new CCylindre(6,0.2,6,-2,-3,0);
     meshes.push_back(cylindre1);
     
-    
-    CCylindre* cylindre2 = new CCylindre(3,0.2,6,2,0,0);
+    CCylindre* cylindre2 = new CCylindre(6,0.2,6,2,-3,0);
     meshes.push_back(cylindre2);
+    
+    CRectangle* corde = new CRectangle(0.05,4,10,10,0,3,true);
+    meshes.push_back(corde);
 
     GetGLError();
 }

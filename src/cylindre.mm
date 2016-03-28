@@ -9,10 +9,6 @@
 #include "cylindre.h"
 #include "math.h"
 
-CCylindre::CCylindre(double hauteur, double rayon, int nbCote, double transX, double transY, double transZ){
-    CMesh();
-    CreateCylindre(hauteur, rayon, nbCote, transX, transY, transZ);
-}
 
 void CCylindre::CreateCylindre(double hauteur, double rayon, int nbCote, double transX, double transY, double transZ){
     CPoint3D pointMilieuHaut = CPoint3D(transX,hauteur+transY,transZ);
