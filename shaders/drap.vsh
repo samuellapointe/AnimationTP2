@@ -49,8 +49,8 @@ void main (void)
 {
     var_texcoord = texcoord;
     
-    N = normalize(normal_matrix*N0);
-    V = normalize(vec3(modelview_matrix*pos));
+    //N = normalize(normal_matrix*N0);
+    //V = normalize(vec3(modelview_matrix*pos));
     var_light_pos = normal_matrix*light_pos;
     
     float angle = pow(2, (-0.25 * pow((-5+2*mod(simulation_time, 5)), 2))) - 0.25;
@@ -59,7 +59,8 @@ void main (void)
     vec4 new = pos;
     
     //Limiter la vague pour que le bas soit plus affecté
-    new.z = ((new.y - 1.5)/(3 - 1.5)) * ((angle + 0.2)/(0.8 - 0.2)) * f(new.x, new.y, simulation_time);
+    float modifier = ((new.y - 1.5)/(3 - 1.5)) * ((angle + 0.2)/(0.8 - 0.2));
+    new.z = -modifier * f(new.x, new.y, simulation_time);
     
     vec4 translationBeforeRotation = vec4(0.0, -1.5, 0.0, 0); // Fixe l'extrémité pour la rotation.
     new += translationBeforeRotation;
@@ -72,14 +73,15 @@ void main (void)
     vec4 position_deplacee = modelview_proj_matrix * new;
     gl_Position = position_deplacee;
     
-    V = normalize(vec3(modelview_matrix*position_deplacee));
+    V = normalize(vec3(modelview_matrix*pos));
     
+    //new = pos;
     // Calcul de la nouvelle normale
-    vec3 fx = vec3(f(pos.x + h, pos.y, simulation_time), 1, 1);
-    vec3 fy = vec3(1, f(pos.x, pos.y + h, simulation_time), 1);
+    vec3 fx = vec3(new.x+h, new.y, modifier * f(new.x+h, new.y, simulation_time));
+    vec3 fy = vec3(new.x, new.y+h, modifier * f(new.x, new.y+h, simulation_time));
     //vec4 fx = (f(vec4(pos.x + h, pos.y, pos.z, 0), simulation_time) - f(pos, simulation_time))/h;
     //vec4 fy = (f(vec4(pos.x, pos.y + h, pos.z, 0), simulation_time) - f(pos, simulation_time))/h;
-    N = normalize(N + cross(fx, fy));
+    N = cross(fx, fy);
 }
 
 
