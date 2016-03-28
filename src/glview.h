@@ -18,8 +18,11 @@ class CMesh;
     
     float mouse_x0, mouse_y0;
     
+    float simulation_time;
+    
     //CMesh*      mesh;
     CRenderer*  renderer;
+    float time_interval;
     NSTimer*    frame_timer;
     
     std::vector<CMesh*> meshes;

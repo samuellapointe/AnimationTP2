@@ -306,10 +306,14 @@ NSString* choose_image_file()
 {
     if ( frame_timer )
         return;
-    frame_timer = [NSTimer timerWithTimeInterval:(1.0/60.0) target:self
+    
+    simulation_time = 0;
+    time_interval = 1.0f/60.0f;
+    frame_timer = [NSTimer timerWithTimeInterval:time_interval target:self
                                        selector:@selector(calc_frame:) userInfo:nil repeats:YES];
+    [frame_timer fire];
     [[NSRunLoop currentRunLoop]addTimer:frame_timer forMode: NSDefaultRunLoopMode];
-   
+    
     //** TODO: Réinitialiser la simulation.
 }
 
@@ -364,8 +368,8 @@ static const float rot_factor = 0.25;
 
 - (void)calc_frame:(NSTimer *)pTimer
 {
-    static long test_counter = 0;
-    cout << "calc_frame : " << test_counter++ << endl;
+    simulation_time += time_interval;
+    cout << "cal_frame at time : " << simulation_time << endl;
 
     
     [self setNeedsDisplay:YES];
@@ -385,7 +389,7 @@ static const float rot_factor = 0.25;
     
     [renderer clear];
     for(int i = 0; i < meshes.size(); i++) {
-        [renderer render:meshes[i]];
+        [renderer render:meshes[i] atSimulationTime:simulation_time];
     }
     
     

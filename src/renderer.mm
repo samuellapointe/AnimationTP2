@@ -304,9 +304,7 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
     glUniform1f(loc, val);
 }
 
-
-GLfloat simulation_time = 0;
-- (void)render:(CMesh*)mesh
+- (void)render:(CMesh*)mesh atSimulationTime:(float)simulation_time
 {
     GLfloat viewdir_matrix[16];        // Matrice sans la translation (pour le cube map et le skybox).
     GLfloat model_view_matrix[16];
@@ -314,8 +312,6 @@ GLfloat simulation_time = 0;
     GLfloat normal_matrix[9];    
     GLfloat mvp_matrix[16];
     GLfloat vp_matrix[16];
-    
-    simulation_time += 0.1;
     
     mtxLoadPerspective(projection_matrix, 50, (float)view_width/ (float)view_height, 1.0, 100.0);
     mtxLoadTranslate(model_view_matrix, 0, 0.0, camposz);
@@ -331,10 +327,8 @@ GLfloat simulation_time = 0;
     mtxMultiply(mvp_matrix, projection_matrix, model_view_matrix);
     mtxMultiply(vp_matrix, projection_matrix, viewdir_matrix);
     
-    
     mtx3x3FromTopLeftOf4x4(normal_matrix, model_view_matrix);
     mtx3x3Invert(normal_matrix, normal_matrix);
-
     
     if ( mesh )
     {
