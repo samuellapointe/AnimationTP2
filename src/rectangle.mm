@@ -21,7 +21,7 @@ void CRectangle::CreateRectangle(double sizeH, double sizeV, int resH, int resV,
         //Pour chaque point sur cette ligne
         for (int j = 0; j < resH; j++) {
             //Créer le sommet
-            int index = resV*i + j;
+            int index = resH*i + j;
             float x = depart[0] + ((arrivee[0]-depart[0])/(resH-1))*j;
             float y = depart[1];
             float z = depart[2] + ((arrivee[2]-depart[2])/(resV-1))*i;
@@ -60,6 +60,7 @@ void CRectangle::CreateRectangle(double sizeH, double sizeV, int resH, int resV,
         vertices[i]->v = v;    
     }
     
+    std::cout << resV << " " << resH << "\n";
     //Pour chaque ligne, sauf la dernière
     for (int i = 0; i < resV-1; i++) {
         //Changer l'orientation de départ pour chaque ligne
@@ -67,15 +68,16 @@ void CRectangle::CreateRectangle(double sizeH, double sizeV, int resH, int resV,
         
         //Pour chaque point sur cette ligne, sauf le dernier
         for (int j = 0; j < resH-1; j++) {
-            int index = resV*i + j;
+            int index = resH*i + j;
             
             //Changer l'orientation pour chaque triangle
             int localOrientation = (orientation + j) % 2;
             
             //On fait un carré partant du point actuel jusqu'au point inferieur droit
+
             CVertex* cornerTopLeft = vertices[index];
             CVertex* cornerTopRight = vertices[index+1];
-            CVertex* cornerBottomLeft = vertices[index+resH];
+            CVertex* cornerBottomLeft = vertices[index+resH+0];
             CVertex* cornerBottomRight = vertices[index+resH+1];
             
             //Composé de deux triangles, orientation variante

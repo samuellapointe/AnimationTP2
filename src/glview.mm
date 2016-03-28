@@ -140,11 +140,11 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
     
     //mesh->set_diffuse_tex_id(gl_load_texture2D([file_path_name cStringUsingEncoding:NSUTF8StringEncoding]));
     
-    CRectangle* rectangle = new CRectangle(4, 2, 30, 30, 0, 1, true);
+    CRectangle* rectangle = new CRectangle(4, 3, 3, 4, 0, 1, true);
     rectangle->set_diffuse_tex_id(gl_load_texture2D([file_texture1 cStringUsingEncoding:NSUTF8StringEncoding]));
     meshes.push_back(rectangle);
     
-    CRectangle* rectangle2 = new CRectangle(8, 4, 30, 30,0,-3);
+    CRectangle* rectangle2 = new CRectangle(8, 4, 2, 2,0,-3);
     rectangle2->set_diffuse_tex_id(gl_load_texture2D([file_texture2 cStringUsingEncoding:NSUTF8StringEncoding]));
     meshes.push_back(rectangle2);
     
