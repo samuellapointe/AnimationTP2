@@ -73,7 +73,7 @@ void main (void)
     
     vec4 translationToPosition = vec4(0.0, 4.5, 0.0, 0);
     new += translationToPosition; // On monte le drap à sa bonne position.
-    vec4 position_deplacee = modelview_proj_matrix*new + vec4(0, f(pos.x, pos.y, simulation_time), 0, 0);
+    vec4 position_deplacee = modelview_proj_matrix * (new + vec4(0, f(pos.x, pos.y, simulation_time), 0, 0));
     gl_Position = position_deplacee;
     
     V = normalize(vec3(modelview_matrix*position_deplacee));
