@@ -21,13 +21,6 @@ out vec3 var_light_pos;
 
 #define h 0.0001
 
-/*
-vec4 f(vec4 position, float t)
-{
-    vec4 value = vec4(position.x, (1*sin(position.x + t)) + position.y, position.z, position.w);
-    return value;
-}
-*/
 float f(float x, float y, float t)
 {
     float value = sin(2.9 * x + t) * cos(1.4 * y + 2*t) * 0.2;
@@ -47,16 +40,16 @@ vec4 rotate(vec4 position, float angle)
 
 void main (void)
 {
-    var_texcoord = texcoord;
+    vec4 new = pos;
     
-    //N = normalize(normal_matrix*N0);
-    //V = normalize(vec3(modelview_matrix*pos));
+    //Texture
+    var_texcoord = texcoord;
+
+    //Lumiere
     var_light_pos = normal_matrix*light_pos;
     
+    //Angle du drap
     float angle = pow(2, (-0.25 * pow((-5+2*mod(simulation_time, 5)), 2))) - 0.25;
-    
-    
-    vec4 new = pos;
     
     //Limiter la vague pour que le bas soit plus affecté
     float modifier = ((new.y - 1.5)/(3 - 1.5)) * ((angle + 0.2)/(0.8 - 0.2));
@@ -70,17 +63,14 @@ void main (void)
     vec4 translationToPosition = vec4(0.0, 4.5, 0.0, 0);
     new += translationToPosition; // On monte le drap à sa bonne position.
     
+    // Calcul du vecteur V et de la position finale
     vec4 position_deplacee = modelview_proj_matrix * new;
+    V = vec3(modelview_matrix*position_deplacee);
     gl_Position = position_deplacee;
     
-    V = normalize(vec3(modelview_matrix*pos));
-    
-    //new = pos;
     // Calcul de la nouvelle normale
     vec3 fx = vec3(new.x+h, new.y, modifier * f(new.x+h, new.y, simulation_time));
     vec3 fy = vec3(new.x, new.y+h, modifier * f(new.x, new.y+h, simulation_time));
-    //vec4 fx = (f(vec4(pos.x + h, pos.y, pos.z, 0), simulation_time) - f(pos, simulation_time))/h;
-    //vec4 fy = (f(vec4(pos.x, pos.y + h, pos.z, 0), simulation_time) - f(pos, simulation_time))/h;
     N = cross(fx, fy);
 }
 
