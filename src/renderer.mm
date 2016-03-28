@@ -328,12 +328,7 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
     }
 }
 
-<<<<<<< HEAD
 - (void)render:(CMesh*)mesh atSimulationTime:(float)simulation_time dynamic:(bool)dynamic
-=======
-
-- (void)render:(CMesh*)mesh atSimulationTime:(float)simulation_time
->>>>>>> pour puller D=
 {
     GLfloat viewdir_matrix[16];        // Matrice sans la translation (pour le cube map et le skybox).
     GLfloat model_view_matrix[16];
@@ -384,13 +379,7 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
         
         loc = glGetUniformLocation(shader_prog_name[shaderNo], "cam_pos");
         glUniform3f(loc, normal_matrix[6], normal_matrix[7], normal_matrix[8]);
-<<<<<<< HEAD
         mesh->Draw(shader_prog_name[shaderNo]);
-=======
-        
-        
-        mesh->Draw(shader_prog_name);
->>>>>>> pour puller D=
     }
 }
 
