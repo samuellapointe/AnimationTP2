@@ -141,21 +141,21 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
     //mesh->set_diffuse_tex_id(gl_load_texture2D([file_path_name cStringUsingEncoding:NSUTF8StringEncoding]));
     
     //Rectangle du drap (Hauteur, largeur, resolutionX, resolutionY, Bool (Drap et non plancher))
-    CRectangle* rectangle = new CRectangle(4, 3, 30, 30, true);
+    CRectangle* rectangle = new CRectangle(3, 4, 40, 30, true);
     rectangle->set_diffuse_tex_id(gl_load_texture2D([file_texture1 cStringUsingEncoding:NSUTF8StringEncoding]));
     meshes.push_back(rectangle);
     
     //Rectangle du plancher(Longueur,profondeur, resolutionX, resolutionY)
     CRectangle* rectangle2 = new CRectangle(8, 8, 2, 2);
-
     rectangle2->set_diffuse_tex_id(gl_load_texture2D([file_texture2 cStringUsingEncoding:NSUTF8StringEncoding]));
     meshes.push_back(rectangle2);
     
     //Cylindre gauche (Hauteur, rayon, nombre de faces, translationX);
-    CCylindre* cylindre1 = new CCylindre(6, 0.2, 50,-2);
+    CCylindre* cylindre1 = new CCylindre(6, 0.2, 6,-3);
     meshes.push_back(cylindre1);
     
-    CCylindre* cylindre2 = new CCylindre(6, 0.2, 50, 2);
+    //Cylindre droit (Hauteur, rayon, nombre de faces, translationX);
+    CCylindre* cylindre2 = new CCylindre(6, 0.2, 6, 3);
     meshes.push_back(cylindre2);
     
     GetGLError();
@@ -402,6 +402,7 @@ static const float rot_factor = 0.25;
     for(int i = 0; i < meshes.size(); i++) {
         [renderer render:meshes[i] atSimulationTime:simulation_time];
     }
+    
     
     
 	CGLFlushDrawable([[self openGLContext] CGLContextObj]);

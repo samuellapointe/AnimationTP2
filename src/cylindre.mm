@@ -22,10 +22,8 @@ void CCylindre::CreateCylindre(double hauteur, double rayon, int nbCote, double 
         //Création des sommets du haut et bas
         int indexH = i*2;
         int indexB = i*2+1;
-        double leCos = cos((delta*i)*(M_PI/180));
-        double leSin = sin((delta*i)*(M_PI/180));
-        double x = rayon*leCos+transX;
-        double z = rayon*leSin;
+        double x = rayon*cos((delta*i)*(M_PI/180))+transX;
+        double z = rayon*sin((delta*i)*(M_PI/180));
         double yH = hauteur;
         double yB = 0;
         
