@@ -66,7 +66,7 @@ void main (void)
     float angle = pow(2, (-0.25 * pow((-5+2*mod(simulation_time, 5)), 2))) - 0.25;
     
     vec4 new = pos;
-    vec4 translationBeforeRotation = vec4(0.0, -2.0, 0.0, 0); // Fixe l'extrémité pour la rotation.
+    vec4 translationBeforeRotation = vec4(0.0, -1.5, 0.0, 0); // Fixe l'extrémité pour la rotation.
     new += translationBeforeRotation;
     new = rotate(new, angle); // On rotationne autour de l'origine avec une extrémité fixée.
     new -= translationBeforeRotation; // On replace le maillage comme avant sa translation (centré à l'origine).
