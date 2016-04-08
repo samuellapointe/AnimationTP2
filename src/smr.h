@@ -27,6 +27,8 @@ public:
     
     std::list<CParticule*> particulesAdj; //Liste des particules connectées à celle-ci
     CVertex* vertex; //Le sommet du mesh associé à cette particule
+    
+public:
     CPoint3D pos[2];
     CVect3D vel[2];
     float masse;//test
@@ -47,6 +49,7 @@ public:
     float longueur_repos;
     float k; //Constante de Hooke.
     
+public:
     CVect3D F() const; // Calcul de la force du ressort.
 };
 
