@@ -32,10 +32,16 @@ public:
     CPoint3D pos[2];
     CVect3D vel[2];
     float masse;//test
+
 };
 
 
 class CRessort{
+private:
+    CParticule *P0,*P1;
+    float longueur_repos;
+    float k; //Constante de Hooke.
+    
 public:
     CRessort(CParticule* _p0, CParticule* _p1, float _repos, float _k)
     {
@@ -44,10 +50,6 @@ public:
         longueur_repos = _repos;
         k = _k;
     }
-    
-    CParticule *P0,*P1;
-    float longueur_repos;
-    float k; //Constante de Hooke.
     
 public:
     CVect3D F() const; // Calcul de la force du ressort.

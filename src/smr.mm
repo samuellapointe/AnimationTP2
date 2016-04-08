@@ -21,3 +21,8 @@ CVect3D CRessort::F() const
     CVect3D forceRessort = -k * (Module(xMinusY) - longueur_repos ) * (xMinusY/Module(xMinusY));
     return forceRessort;
 }
+
+void CIntegrateur::step()
+{
+
+}
