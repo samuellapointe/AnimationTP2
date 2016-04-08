@@ -29,7 +29,7 @@ public:
     CVertex* vertex; //Le sommet du mesh associé à cette particule
     CPoint3D pos[2];
     CVect3D vel[2];
-    float masse;
+    float masse;//test
 };
 
 
