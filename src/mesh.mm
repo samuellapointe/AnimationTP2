@@ -194,13 +194,27 @@ void    CMesh::AllocVBOData()
     // Transfert des données vers la carte graphique.
     glBindBuffer(GL_ARRAY_BUFFER, ogl_buf_vextex_id);
     glBufferData(GL_ARRAY_BUFFER, vertex_data_size()*vertices.size(), buf_vtx, GL_STATIC_DRAW);
+    //GLvoid* vertexBuffer = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY); //?
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ogl_buf_index_id);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3*sizeof(GLuint)*triangles.size(), buf_idx, GL_STATIC_DRAW);     
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3*sizeof(GLuint)*triangles.size(), buf_idx, GL_STATIC_DRAW);
+    //GLvoid* triangleBuffer = glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY); //?
+    
+    //memcpy(vertexBuffer, buf_vtx, vertex_data_size()*vertices.size()); //?
+    //memcpy(triangleBuffer, buf_idx, 3*sizeof(GLuint)*triangles.size()); //?
+    
+    //glUnmapBuffer(GL_ARRAY_BUFFER);
+    //glUnmapBuffer(GL_ARRAY_BUFFER);
 
     // Plus besoin.
     free(buf_vtx);
     free(buf_idx);
+}
+
+void CMesh::UpdateVBO() {
+    //glMapBuffer
+    
+    //glUnmapBuffer
 }
 
 
