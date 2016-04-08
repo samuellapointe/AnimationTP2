@@ -13,8 +13,8 @@ void CDrap::CreateDrap() {
     //coins opposés
     CPoint3D depart = CPoint3D(-2, 6, 0);
     CPoint3D arrivee = CPoint3D(2, 3, 0);
-    int resV = 40;
-    int resH = 30;
+    resV = 40;
+    resH = 30;
     
     float xmin = HUGE_VAL, xmax = -HUGE_VAL, ymin = HUGE_VAL, ymax=-HUGE_VAL;
     

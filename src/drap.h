@@ -17,9 +17,12 @@ public:
         CMesh();
         CreateDrap();
     }
+    int getResH() {return resH;};
+    int getResV() {return resV;};
     
 private:
     void CreateDrap();
+    int resH, resV;
 };
 
 #endif /* drap_h */

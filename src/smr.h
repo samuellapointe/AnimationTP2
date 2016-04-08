@@ -11,7 +11,7 @@
 
 #include <list>
 #include <vector>
-#include "mesh.h"
+#include "drap.h"
 
 class CParticule{
 public:
@@ -31,8 +31,7 @@ public:
 public:
     CPoint3D pos[2];
     CVect3D vel[2];
-    float masse;//test
-
+    float masse;
 };
 
 
@@ -57,14 +56,15 @@ public:
 
 
 class CSMR{
-private:
-    CMesh* mesh;
+public:
+    CSMR(CDrap* _drap);
+    ~CSMR();
+    
+    CDrap* drap;
     std::list<CParticule*> particules;
     std::list<CRessort*> ressorts;
     
-public:
-    CSMR(CMesh* _mesh);
-    ~CSMR();
+
     
 };
 
