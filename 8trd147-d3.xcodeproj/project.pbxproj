@@ -29,7 +29,7 @@
 		B1D0C7DC1A289DF9007E1C2A /* point3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1D0C7D91A289DF9007E1C2A /* point3d.cpp */; };
 		B1E1E2F51A3A3FA100386427 /* mur.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B1E1E2F21A3A3FA100386427 /* mur.jpg */; };
 		EC2168361CA572CA00B81F83 /* rectangle.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC2168351CA572CA00B81F83 /* rectangle.mm */; settings = {ASSET_TAGS = (); }; };
-		EC3963C81CB81FCE00073B72 /* CSMR.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC3963C71CB81FCE00073B72 /* CSMR.mm */; settings = {ASSET_TAGS = (); }; };
+		EC3963C81CB81FCE00073B72 /* smr.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC3963C71CB81FCE00073B72 /* smr.mm */; settings = {ASSET_TAGS = (); }; };
 		EC598E921CA9BB2200C6BB4B /* corde.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC598E911CA9BB2200C6BB4B /* corde.mm */; settings = {ASSET_TAGS = (); }; };
 		EC6AB9521C9D87F900F9DDCE /* drap.fsh in Resources */ = {isa = PBXBuildFile; fileRef = EC6AB9501C9D87F900F9DDCE /* drap.fsh */; settings = {ASSET_TAGS = (); }; };
 		EC6AB9531C9D87F900F9DDCE /* drap.vsh in Resources */ = {isa = PBXBuildFile; fileRef = EC6AB9511C9D87F900F9DDCE /* drap.vsh */; settings = {ASSET_TAGS = (); }; };
@@ -73,8 +73,8 @@
 		B1E1E2F21A3A3FA100386427 /* mur.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mur.jpg; path = models/mur.jpg; sourceTree = "<group>"; };
 		EC2168351CA572CA00B81F83 /* rectangle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = rectangle.mm; path = src/rectangle.mm; sourceTree = "<group>"; };
 		EC2168381CA579D700B81F83 /* rectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rectangle.h; path = src/rectangle.h; sourceTree = "<group>"; };
-		EC3963C61CB81FBA00073B72 /* CSMR.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CSMR.h; path = src/CSMR.h; sourceTree = "<group>"; };
-		EC3963C71CB81FCE00073B72 /* CSMR.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CSMR.mm; path = src/CSMR.mm; sourceTree = "<group>"; };
+		EC3963C61CB81FBA00073B72 /* smr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = smr.h; path = src/smr.h; sourceTree = "<group>"; };
+		EC3963C71CB81FCE00073B72 /* smr.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = smr.mm; path = src/smr.mm; sourceTree = "<group>"; };
 		EC598E901CA9BA9600C6BB4B /* corde.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = corde.h; path = src/corde.h; sourceTree = "<group>"; };
 		EC598E911CA9BB2200C6BB4B /* corde.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = corde.mm; path = src/corde.mm; sourceTree = "<group>"; };
 		EC6AB9501C9D87F900F9DDCE /* drap.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = drap.fsh; path = shaders/drap.fsh; sourceTree = "<group>"; };
@@ -117,8 +117,8 @@
 				B123563918C376B900D5EC60 /* windowcontroller.mm */,
 				EC598E901CA9BA9600C6BB4B /* corde.h */,
 				EC598E911CA9BB2200C6BB4B /* corde.mm */,
-				EC3963C61CB81FBA00073B72 /* CSMR.h */,
-				EC3963C71CB81FCE00073B72 /* CSMR.mm */,
+				EC3963C61CB81FBA00073B72 /* smr.h */,
+				EC3963C71CB81FCE00073B72 /* smr.mm */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -284,7 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC3963C81CB81FCE00073B72 /* CSMR.mm in Sources */,
+				EC3963C81CB81FCE00073B72 /* smr.mm in Sources */,
 				B132F6E818C37B700020FC7D /* imageutil.mm in Sources */,
 				B123564018C376B900D5EC60 /* main.m in Sources */,
 				B1D0C7DB1A289DF9007E1C2A /* mesh.mm in Sources */,
