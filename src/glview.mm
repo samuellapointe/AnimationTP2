@@ -3,6 +3,7 @@
 #import "renderer.h"
 
 #include "mesh.h"
+#include "drap.h"
 #include "rectangle.h"
 #include "cylindre.h"
 #include "corde.h"
@@ -142,10 +143,10 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
     
 
     //Rectangle du drap (Hauteur, largeur, resolutionX, resolutionY, Bool (Drap et non plancher))
-    CRectangle* rectangle = new CRectangle(3, 4, 40, 30, true);
+    CDrap* drap = new CDrap();
     
-    rectangle->set_diffuse_tex_id(gl_load_texture2D([file_texture1 cStringUsingEncoding:NSUTF8StringEncoding]));
-    dynamic_meshes.push_back(rectangle);
+    drap->set_diffuse_tex_id(gl_load_texture2D([file_texture1 cStringUsingEncoding:NSUTF8StringEncoding]));
+    dynamic_meshes.push_back(drap);
     
     //Rectangle du plancher(Longueur,profondeur, resolutionX, resolutionY)
     CRectangle* rectangle2 = new CRectangle(8, 8, 2, 2);
