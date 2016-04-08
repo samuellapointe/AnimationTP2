@@ -1,4 +1,5 @@
 
+
 #import "renderer.h"
 #import "matrixUtil.h"
 #import "imageUtil.h"
@@ -53,7 +54,7 @@ enum {
 @implementation CRenderer
 
 // Variable globales (c'est pas idéal, mais c'est un prototype).
-GLuint shader_prog_name[2];
+GLuint shader_prog_name[1];
 GLint uniform_mvp_matrix_idx[2];
 GLint uniform_model_view_matrix_idx[2];
 GLint uniform_normal_matrix_idx[2];
@@ -237,16 +238,8 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
         frgSource = shader_source_load([file_path_name cStringUsingEncoding:NSASCIIStringEncoding]);
         
 		shader_prog_name[0] = [self build_prog:vtxSource with_fragment_src:frgSource];
-        
-        file_path_name = [[NSBundle mainBundle] pathForResource:@"drap" ofType:@"vsh"];
-        vtxSource = shader_source_load([file_path_name cStringUsingEncoding:NSASCIIStringEncoding]);
-        
-        file_path_name = [[NSBundle mainBundle] pathForResource:@"drap" ofType:@"fsh"];
-        frgSource = shader_source_load([file_path_name cStringUsingEncoding:NSASCIIStringEncoding]);
 
-        shader_prog_name[1] = [self build_prog:vtxSource with_fragment_src:frgSource];
-
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 1; i++) {
             glUseProgram(shader_prog_name[i]);
             GLuint loc = glGetUniformLocation(shader_prog_name[i], "tex_diffuse");
             glUniform1i(loc, 0);
@@ -359,7 +352,7 @@ GLfloat rotx = 0.0, roty = 0.0, rotz = 0.0, camposz = -10.0;
         int shaderNo;
         
         if (dynamic) {
-            shaderNo = 1;
+            //shaderNo = 1; Désactivé pour le TP3
         } else {
             shaderNo = 0;
         }
