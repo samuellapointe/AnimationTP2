@@ -37,7 +37,7 @@
 
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		3A1598D311B9DDB0001E7AB5 /* 8trd147-d2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "8trd147-d2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A1598D311B9DDB0001E7AB5 /* 8trd147-d3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "8trd147-d3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A1598E011B9DDF3001E7AB5 /* generic.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = generic.vsh; path = Shaders/generic.vsh; sourceTree = "<group>"; };
 		3A1598E111B9DDF3001E7AB5 /* generic.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = generic.fsh; path = Shaders/generic.fsh; sourceTree = "<group>"; };
 		3A1598EE11B9DE37001E7AB5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -49,9 +49,9 @@
 		B123563918C376B900D5EC60 /* windowcontroller.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = windowcontroller.mm; path = src/windowcontroller.mm; sourceTree = "<group>"; };
 		B123563A18C376B900D5EC60 /* windowcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = windowcontroller.h; path = src/windowcontroller.h; sourceTree = "<group>"; };
 		B123563B18C376B900D5EC60 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = src/main.m; sourceTree = "<group>"; };
-		B123563C18C376B900D5EC60 /* 8trd147-d2_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "8trd147-d2_Prefix.pch"; path = "src/8trd147-d2_Prefix.pch"; sourceTree = "<group>"; };
+		B123563C18C376B900D5EC60 /* 8trd147-d3_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "8trd147-d3_Prefix.pch"; path = "src/8trd147-d3_Prefix.pch"; sourceTree = "<group>"; };
 		B123565118C376FB00D5EC60 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = resources/MainMenu.xib; sourceTree = "<group>"; };
-		B123565218C376FB00D5EC60 /* 8trd147-d2-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "8trd147-d2-Info.plist"; path = "resources/8trd147-d2-Info.plist"; sourceTree = "<group>"; };
+		B123565218C376FB00D5EC60 /* 8trd147-d3-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "8trd147-d3-Info.plist"; path = "resources/8trd147-d3-Info.plist"; sourceTree = "<group>"; };
 		B123565318C376FB00D5EC60 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = resources/InfoPlist.strings; sourceTree = "<group>"; };
 		B132F6DF18C37B700020FC7D /* imageutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imageutil.h; path = utils/imageutil.h; sourceTree = "<group>"; };
 		B132F6E018C37B700020FC7D /* imageutil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = imageutil.mm; path = utils/imageutil.mm; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3A1598D311B9DDB0001E7AB5 /* 8trd147-d2.app */,
+				3A1598D311B9DDB0001E7AB5 /* 8trd147-d3.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,7 +162,7 @@
 				B1843C051A3CCB2500B2E033 /* glutil.cpp */,
 				B132F6E518C37B700020FC7D /* sourceutil.h */,
 				B132F6E418C37B700020FC7D /* sourceutil.cpp */,
-				B123563C18C376B900D5EC60 /* 8trd147-d2_Prefix.pch */,
+				B123563C18C376B900D5EC60 /* 8trd147-d3_Prefix.pch */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -172,7 +172,7 @@
 			children = (
 				B1F9DDB51A3CA78000C1304C /* models */,
 				B123565118C376FB00D5EC60 /* MainMenu.xib */,
-				B123565218C376FB00D5EC60 /* 8trd147-d2-Info.plist */,
+				B123565218C376FB00D5EC60 /* 8trd147-d3-Info.plist */,
 				B123565318C376FB00D5EC60 /* InfoPlist.strings */,
 			);
 			name = resources;
@@ -210,9 +210,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D1107260486CEB800E47090 /* 8trd147-d2 */ = {
+		8D1107260486CEB800E47090 /* 8trd147-d3 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "8trd147-d2" */;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "8trd147-d3" */;
 			buildPhases = (
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
@@ -222,10 +222,10 @@
 			);
 			dependencies = (
 			);
-			name = "8trd147-d2";
+			name = "8trd147-d3";
 			productInstallPath = "$(HOME)/Applications";
 			productName = OSXGLEssentials;
-			productReference = 3A1598D311B9DDB0001E7AB5 /* 8trd147-d2.app */;
+			productReference = 3A1598D311B9DDB0001E7AB5 /* 8trd147-d3.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -236,7 +236,7 @@
 			attributes = {
 				LastUpgradeCheck = 0700;
 			};
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "8trd147-d2" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "8trd147-d3" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -250,7 +250,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8D1107260486CEB800E47090 /* 8trd147-d2 */,
+				8D1107260486CEB800E47090 /* 8trd147-d3 */,
 			);
 		};
 /* End PBXProject section */
@@ -309,13 +309,13 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "src/8trd147-d2_Prefix.pch";
+				GCC_PREFIX_HEADER = "src/8trd147-d3_Prefix.pch";
 				GCC_THREADSAFE_STATICS = YES;
-				INFOPLIST_FILE = "resources/8trd147-d2-Info.plist";
+				INFOPLIST_FILE = "resources/8trd147-d3-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.yc.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "8trd147-d2";
+				PRODUCT_NAME = "8trd147-d3";
 			};
 			name = Debug;
 		};
@@ -327,13 +327,13 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "src/8trd147-d2_Prefix.pch";
+				GCC_PREFIX_HEADER = "src/8trd147-d3_Prefix.pch";
 				GCC_THREADSAFE_STATICS = YES;
-				INFOPLIST_FILE = "resources/8trd147-d2-Info.plist";
+				INFOPLIST_FILE = "resources/8trd147-d3-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.yc.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "8trd147-d2";
+				PRODUCT_NAME = "8trd147-d3";
 			};
 			name = Release;
 		};
@@ -364,7 +364,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "8trd147-d2" */ = {
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "8trd147-d3" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4B08A954540054247B /* Debug */,
@@ -373,7 +373,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "8trd147-d2" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "8trd147-d3" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
