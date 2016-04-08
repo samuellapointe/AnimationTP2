@@ -7,3 +7,9 @@
 //
 
 #define h 0.001
+#include "smr.h"
+
+CSMR::CSMR(CMesh* _mesh)
+{
+    
+}
