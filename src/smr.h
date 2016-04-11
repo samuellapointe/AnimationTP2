@@ -73,6 +73,8 @@ public:
 
 
 class CIntegrateur{
+public:
+    CIntegrateur(CSMR* _smr){ smr = _smr; }
     CSMR* smr;
     
     void step();

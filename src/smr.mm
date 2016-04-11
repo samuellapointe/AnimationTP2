@@ -14,9 +14,9 @@ CSMR::CSMR(CDrap* _drap)
 {
     drap = _drap;
     
-    float reposH = (*drap).getSize(0)/(*drap).getResH();
-    float reposV = (*drap).getSize(1)/(*drap).getResV();
-    float reposD = 
+    float reposH = float((*drap).getSize(0))/float((*drap).getResH());
+    float reposV = float((*drap).getSize(1))/float((*drap).getResV());
+    float reposD = sqrt(pow(reposH,2)+pow(reposD,2));
     
     int ligne = 1;
     int cpt = 0;
@@ -30,8 +30,10 @@ CSMR::CSMR(CDrap* _drap)
     
     for(it=particules.begin();cpt<14;it++)
     {
-        ressorts.push_back(new CRessort(*it,std::next(*it,1,(*drap).getSize(0),100)))
+        ressorts.push_back(new CRessort(*it,std::next(*it,1),reposH,100));
+        cpt++;
     }
+    
 }
 
 CVect3D CRessort::F() const

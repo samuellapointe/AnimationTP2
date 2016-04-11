@@ -2,6 +2,7 @@
 #import "glview.h"
 #import "renderer.h"
 
+#include "smr.h"
 #include "mesh.h"
 #include "drap.h"
 #include "rectangle.h"
@@ -144,7 +145,7 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
 
     //Rectangle du drap (Hauteur, largeur, resolutionX, resolutionY, Bool (Drap et non plancher))
     CDrap* drap = new CDrap();
-    
+    CSMR* smr = new CSMR(drap);
     drap->set_diffuse_tex_id(gl_load_texture2D([file_texture1 cStringUsingEncoding:NSUTF8StringEncoding]));
     dynamic_meshes.push_back(drap);
     
@@ -383,7 +384,10 @@ static const float rot_factor = 0.25;
 {
     simulation_time += time_interval;
     cout << "cal_frame at time : " << simulation_time << endl;
-
+    
+    //CIntegrateur integrateur(smr);
+    
+   // integrateur.step();
     
     [self setNeedsDisplay:YES];
 }

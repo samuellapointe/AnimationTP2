@@ -2,7 +2,6 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/CVDisplayLink.h>
 
-
 #import "imageutil.h"
 #import <vector>
 
@@ -24,7 +23,6 @@ class CMesh;
     CRenderer*  renderer;
     float time_interval;
     NSTimer*    frame_timer;
-    
     std::vector<CMesh*> static_meshes;
     std::vector<CMesh*> dynamic_meshes;
 }
