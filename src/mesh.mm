@@ -204,26 +204,22 @@ void    CMesh::AllocVBOData()
 }
 
 void CMesh::UpdateVBO() {
-    //Modification des vertex
-    for (int i = 0; i < vertices.size(); i++ )
-    {
-        //vertices[i]->operator+=(CVect3D(1, 0, 0));
-    }
-    
+    //Faire un tableau de GLFloat à envoyer
     GLfloat* buf_vtx = (GLfloat*)malloc(vertex_data_size()*vertices.size());
     GLfloat* pv = buf_vtx;
-    for (int i=0; i<vertices.size(); i++ )
+    for (int i=0; i<vertices.size(); i++ ) {
         pv = put_vertex(*vertices[i], pv);
+    }
     
     //Aller chercher l'emplacement des coordonnées
-    GLvoid* vertexBuffer = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY); //?
+    GLvoid* vertexBuffer = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     
     //Remplacer les points
-    //glBufferData(GL_ARRAY_BUFFER, vertex_data_size()*vertices.size(), pv, GL_STATIC_DRAW);
-    memcpy(vertexBuffer, pv, vertex_data_size()*vertices.size());
+    memcpy(vertexBuffer, buf_vtx, vertex_data_size()*vertices.size());
     
     //Désallouer la mémoire
-    bool success = glUnmapBuffer(GL_ARRAY_BUFFER);
+    glUnmapBuffer(GL_ARRAY_BUFFER);
+    free(buf_vtx);
 }
 
 
@@ -384,8 +380,6 @@ void CMesh::Draw(GLint prog)
     glDisableVertexAttribArray(attrib_position);
     glDisableVertexAttribArray(attrib_texcoord);
     glDisableVertexAttribArray(attrib_normal);
-    
-    //UpdateVBO();
 }
 
 
