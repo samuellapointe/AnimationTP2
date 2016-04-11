@@ -194,17 +194,9 @@ void    CMesh::AllocVBOData()
     // Transfert des données vers la carte graphique.
     glBindBuffer(GL_ARRAY_BUFFER, ogl_buf_vextex_id);
     glBufferData(GL_ARRAY_BUFFER, vertex_data_size()*vertices.size(), buf_vtx, GL_STATIC_DRAW);
-    //GLvoid* vertexBuffer = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY); //?
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ogl_buf_index_id);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3*sizeof(GLuint)*triangles.size(), buf_idx, GL_STATIC_DRAW);
-    //GLvoid* triangleBuffer = glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY); //?
-    
-    //memcpy(vertexBuffer, buf_vtx, vertex_data_size()*vertices.size()); //?
-    //memcpy(triangleBuffer, buf_idx, 3*sizeof(GLuint)*triangles.size()); //?
-    
-    //glUnmapBuffer(GL_ARRAY_BUFFER);
-    //glUnmapBuffer(GL_ARRAY_BUFFER);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 30*sizeof(GLuint)*triangles.size(), buf_idx, GL_STATIC_DRAW);
 
     // Plus besoin.
     free(buf_vtx);
@@ -212,9 +204,26 @@ void    CMesh::AllocVBOData()
 }
 
 void CMesh::UpdateVBO() {
-    //glMapBuffer
+    //Modification des vertex
+    for (int i = 0; i < vertices.size(); i++ )
+    {
+        //vertices[i]->operator+=(CVect3D(1, 0, 0));
+    }
     
-    //glUnmapBuffer
+    GLfloat* buf_vtx = (GLfloat*)malloc(vertex_data_size()*vertices.size());
+    GLfloat* pv = buf_vtx;
+    for (int i=0; i<vertices.size(); i++ )
+        pv = put_vertex(*vertices[i], pv);
+    
+    //Aller chercher l'emplacement des coordonnées
+    GLvoid* vertexBuffer = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY); //?
+    
+    //Remplacer les points
+    //glBufferData(GL_ARRAY_BUFFER, vertex_data_size()*vertices.size(), pv, GL_STATIC_DRAW);
+    memcpy(vertexBuffer, pv, vertex_data_size()*vertices.size());
+    
+    //Désallouer la mémoire
+    bool success = glUnmapBuffer(GL_ARRAY_BUFFER);
 }
 
 
@@ -375,6 +384,8 @@ void CMesh::Draw(GLint prog)
     glDisableVertexAttribArray(attrib_position);
     glDisableVertexAttribArray(attrib_texcoord);
     glDisableVertexAttribArray(attrib_normal);
+    
+    //UpdateVBO();
 }
 
 
