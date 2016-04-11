@@ -25,13 +25,16 @@ public:
         masse = _masse;
     }
     
-    std::list<CParticule*> particulesAdj; //Liste des particules connectées à celle-ci
-    CVertex* vertex; //Le sommet du mesh associé à cette particule
+    void ajouterParticulesAdj(CParticule* _part);
+    CPoint3D getPosition(int index){ return pos[index]; }
+    CVect3D getVelocite(int index) { return vel[index]; }
     
-public:
+private:
     CPoint3D pos[2];
     CVect3D vel[2];
     float masse;
+    CVertex* vertex; //Le sommet du mesh associé à cette particule
+    std::list<CParticule*> particulesAdj; //Liste des particules connectées à celle-ci
 };
 
 

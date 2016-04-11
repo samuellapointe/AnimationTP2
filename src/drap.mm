@@ -11,6 +11,8 @@
 
 void CDrap::CreateDrap() {
     //coins opposés
+    size[0] = 4;
+    size[1] = 3;
     CPoint3D depart = CPoint3D(-2, 6, 0);
     CPoint3D arrivee = CPoint3D(2, 3, 0);
     resV = 40;

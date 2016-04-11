@@ -101,7 +101,7 @@ public:
     friend std::ostream& operator<<(std::ostream&, const CMesh&);
     
     std::list<CTriangle*> getTriangles(){return triangles;};
-    std::vector<CVertex*> getVerties(){return vertices;};
+    std::vector<CVertex*> getVertices(){return vertices;};
     
 protected:
     
