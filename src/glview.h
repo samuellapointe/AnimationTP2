@@ -5,6 +5,9 @@
 #import "imageutil.h"
 #import <vector>
 
+#include "smr.h"
+
+
 class CMesh;
 @class CRenderer;
 

@@ -53,6 +53,9 @@ public:
         k = _k;
     }
     
+    CParticule* getP0();
+    CParticule* getP1();
+    
 public:
     CVect3D F() const; // Calcul de la force du ressort.
 };

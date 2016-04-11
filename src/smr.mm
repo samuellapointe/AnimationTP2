@@ -38,21 +38,49 @@ CSMR::CSMR(CDrap* _drap)
 
 CVect3D CRessort::F() const
 {
-    /*CVect3D xMinusY = (P0->pos) - (P1->pos);
+    CVect3D xMinusY = (P0->getPosition(0)) - (P1->getPosition(0));
     CVect3D forceRessort = -k * (Module(xMinusY) - longueur_repos ) * (xMinusY/Module(xMinusY));
-    return forceRessort;*/
+    return forceRessort;
+}
+
+CParticule* CRessort::getP0()
+{
+    return P0;
+}
+
+CParticule* CRessort::getP1()
+{
+    return P1;
 }
 
 void CIntegrateur::step()
 {
-
-    //for(std::vector<CVertex*>::iterator it = (*drap).getVerties().begin(); it != (*drap).getVerties().end();it++)
-    {
+    // Pour chaque particule
+    for(std::list<CParticule*>::iterator it = (smr->particules).begin(); it != (smr->particules).end();it++)
+    {/*
+        // Interchanger la vitesse et la position
+        CVect3D positionTemp = (*it)->getPosition(0);
+        (*it)->setPosition(0, (*it)->getPosition(1));
+        (*it)->setPosition(1, positionTemp);
         
+        CVect3D vitesseTemp = (*it)->getVelocite(0);
+        (*it)->setVelocite(0, (*it)->getVelocite(1));
+        (*it)->setVelocite(1, vitesseTemp);*/
     }
     
-    //for(std::list<CTriangle*>::iterator it = (*drap).getTriangles().begin(); it != (*drap).getTriangles().end(); it++)
+    /* TODO À remplacer par une boucle sur les particules avec la liste d'adjascence
+    // Pour chaque ressort
+    for(std::list<CRessort*>::iterator it = (smr->ressorts).begin(); it != (smr->ressorts).end();it++)
     {
-        
+        // Ajout de la force exercée par une particule voisine (reliée par un ressort)
+        CVect3D forceRessort((*it)->F());
+        (*it)->getP0()->vel[1] += forceRessort;
+        (*it)->getP1()->vel[1] += forceRessort;
     }
+     */
+    
+    // Test de déplacement de point
+    smr->drap->getVertices()[0]->operator+=(CVect3D(0.1, 0, 0));
+    
+    smr->drap->UpdateVBO();
 }
