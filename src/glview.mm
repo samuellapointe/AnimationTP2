@@ -389,7 +389,7 @@ static const float rot_factor = 0.25;
     
     CIntegrateur integrateur(smr);
     
-    integrateur.step();
+    integrateur.step(simulation_time);
 
     
     [self setNeedsDisplay:YES];

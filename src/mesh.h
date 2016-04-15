@@ -103,6 +103,7 @@ public:
     std::list<CTriangle*> getTriangles(){return triangles;};
     std::vector<CVertex*> getVertices(){return vertices;};
     
+    void    UpdateNormals();
 protected:
     
     // OpenGL
@@ -117,8 +118,6 @@ protected:
     
     std::vector<CVertex*>    vertices;
     std::list<CTriangle*>    triangles;
-
-    void    UpdateNormals();
 };
 
 

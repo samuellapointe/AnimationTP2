@@ -14,10 +14,9 @@ CSMR::CSMR(CDrap* _drap)
 {
     drap = _drap;
     
-    float reposH = float((*drap).getSize(0))/float((*drap).getResH());
-    float reposV = float((*drap).getSize(1))/float((*drap).getResV());
-    float reposD = sqrt(pow(reposH,2)+pow(reposV,2));
-    
+    float reposH = Module(*(*drap).getVertices()[1] - *(*drap).getVertices()[0]);
+    float reposV = Module(*(*drap).getVertices()[(*drap).getResH()] - *(*drap).getVertices()[0]);
+    float reposD = Module(*(*drap).getVertices()[(*drap).getResH() + 1] - *(*drap).getVertices()[0]);
     
     //Création des particules et les insérer dans la liste
     for(std::vector<CVertex*>::iterator it = (*drap).getVertices().begin(); it != (*drap).getVertices().end();it++)
@@ -46,7 +45,7 @@ CSMR::CSMR(CDrap* _drap)
             CParticule* cornerBottomRight = particules[index+(*drap).getResH()+1];
             
             ressorts.push_back(new CRessort(cornerTopLeft,cornerTopRight,reposH,100));
-            if(i != (*drap).getResV())
+            if(i != (*drap).getResV() -1)
             {
                 ressorts.push_back(new CRessort(cornerTopLeft,cornerBottomLeft,reposV,100));
             
@@ -59,10 +58,13 @@ CSMR::CSMR(CDrap* _drap)
             }
         }
         
-        CParticule* top = particules[i*(*drap).getResH()-1];
-        CParticule* below = particules[(i+1)*(*drap).getResH()-1];
+        if(i != (*drap).getResV() -1)
+        {
+            CParticule* top = particules[(i+1)*(*drap).getResH()-1];
+            CParticule* below = particules[(i+2)*(*drap).getResH()-1];
         
-        ressorts.push_back(new CRessort(top,below,reposV,100));
+            ressorts.push_back(new CRessort(top,below,reposV,100));
+        }
     }
     
     
@@ -86,35 +88,89 @@ CParticule* CRessort::getP1()
     return P1;
 }
 
-void CIntegrateur::step()
+void CIntegrateur::step(float simulationTime)
 {
+    /*
+    // TEST - Afficher les positions de chaque particule
+    std::cout << "\n\nTEST\n";
+    int cptParticule = 0;
+    for(std::vector<CParticule*>::iterator it = (smr->particules).begin(); it != (smr->particules).end();it++)
+    {
+        std::cout << "Particule " << cptParticule << "\n  1) " << (*it)->getPosition(0)[0] << " " << (*it)->getPosition(0)[1] << " " << (*it)->getPosition(0)[2] << "  2) " << (*it)->getPosition(0)[0] << " " << (*it)->getPosition(0)[1] << " " << (*it)->getPosition(0)[2]<< "\n\n";
+        ++cptParticule;
+    }
+    */
+    
     // Pour chaque particule
-    //for(std::list<CParticule*>::iterator it = (smr->particules).begin(); it != (smr->particules).end();it++)
-    {/*
-        // Interchanger la vitesse et la position
-        CVect3D positionTemp = (*it)->getPosition(0);
+    //CVect3D positionTemp;
+    //CVect3D vitesseTemp;
+    for(std::vector<CParticule*>::iterator it = (smr->particules).begin(); it != (smr->particules).end();it++)
+    {
+        // Interchanger les vitesses et les positions
+        //positionTemp = (*it)->getPosition(0);
         (*it)->setPosition(0, (*it)->getPosition(1));
-        (*it)->setPosition(1, positionTemp);
+        //(*it)->setPosition(1, CPoint3D(0,0,0));
         
-        CVect3D vitesseTemp = (*it)->getVelocite(0);
-        (*it)->setVelocite(0, (*it)->getVelocite(1));
-        (*it)->setVelocite(1, vitesseTemp);*/
+        //vitesseTemp = (*it)->getVelocity(0);
+        (*it)->setVelocity(0, (*it)->getVelocity(1));
+        //(*it)->setVelocity(1, CVect3D(0,0,0));
     }
     
-    /* TODO À remplacer par une boucle sur les particules avec la liste d'adjascence
-    // Pour chaque ressort
-    for(std::list<CRessort*>::iterator it = (smr->ressorts).begin(); it != (smr->ressorts).end();it++)
+    // TEST - Afficher les positions de chaque particule
+    /*std::cout << "\n\nTEST particules\n";
+    for(std::vector<CParticule*>::iterator it = (smr->particules).begin(); it != (smr->particules).end();it++)
+    {
+        std::cout << "Particule " << (*it)->getVertex()->idx << "\n  1) " << (*it)->getPosition(0)[0] << " " << (*it)->getPosition(0)[1] << " " << (*it)->getPosition(0)[2] << "  2) " << (*it)->getPosition(0)[0] << " " << (*it)->getPosition(0)[1] << " " << (*it)->getPosition(0)[2]<< "\n\n";
+    }*/
+    /*
+    // TEST - Afficher la position des particules de chaque ressort
+    std::cout << "\n\nTEST ressorts\n";
+    int cptRessort = 0;
+    for(std::vector<CRessort*>::iterator it = (smr->ressorts).begin(); it != (smr->ressorts).end(); it++)
+    {
+        std::cout << "Ressort " << cptRessort << ", particule " << (*it)->getP0()->getVertex()->idx << "\n  1) " << (*it)->getP0()->getPosition(0)[0] << " " << (*it)->getP0()->getPosition(0)[1] << " " << (*it)->getP0()->getPosition(0)[2] << "  2) " << (*it)->getP0()->getPosition(0)[0] << " " << (*it)->getP0()->getPosition(0)[1] << " " << (*it)->getP0()->getPosition(0)[2]<< "\n";
+        
+        std::cout << "Ressort " << cptRessort << ", particule " << (*it)->getP1()->getVertex()->idx << "\n  1) " << (*it)->getP1()->getPosition(0)[0] << " " << (*it)->getP1()->getPosition(0)[1] << " " << (*it)->getP1()->getPosition(0)[2] << "  2) " << (*it)->getP1()->getPosition(0)[0] << " " << (*it)->getP1()->getPosition(0)[1] << " " << (*it)->getP1()->getPosition(0)[2]<< "\n\n";
+        
+        ++cptRessort;
+    }
+    */
+    // Pour chaque particule, obtention de la force interne (somme des forces exercées par les ressorts attachés.
+    // Pour ce faire, à chaque ressort on ajoute sa force aux particules concernées.  La force est donc calculée une seule
+    // fois par ressort.
+    for(std::vector<CRessort*>::iterator it = (smr->ressorts).begin(); it != (smr->ressorts).end(); it++)
     {
         // Ajout de la force exercée par une particule voisine (reliée par un ressort)
         CVect3D forceRessort((*it)->F());
-        (*it)->getP0()->vel[1] += forceRessort;
-        (*it)->getP1()->vel[1] += forceRessort;
+        (*it)->getP0()->setVelocity(1, (*it)->getP0()->getVelocity(1) + forceRessort);
+        (*it)->getP1()->setVelocity(1, (*it)->getP1()->getVelocity(1) + forceRessort);
     }
-     */
+    
+    // Calcul de la nouvelle vélocité et position de chaque particule
+    for(std::vector<CParticule*>::iterator it = (smr->particules).begin(); it != (smr->particules).end();it++)
+    {
+        if((*it)->getVertex()->idx >= (smr->drap)->getResH())
+        {
+            // Nouvelle vélocité
+            CVect3D forcesExternesTemp = f_vent((*it)->getPosition(0), simulationTime);
+            (*it)->setVelocity(1, (*it)->getVelocity(0) + (h * (1/(*it)->getMasse() * (forcesExternesTemp -(*it)->getVelocity(1)))));
+        
+            // Nouvelle position
+            (*it)->setPosition(1, (*it)->getPosition(0) + (h * (*it)->getVelocity(1)));
+        }
+    }
+    
+    // Mise à jour du maillage du drap selon la position des particules du système masses-ressorts
+    CVect3D deplacementPosition;
+    for(std::vector<CParticule*>::iterator it = (smr->particules).begin(); it != (smr->particules).end();it++)
+    {
+        deplacementPosition = (*it)->getPosition(1) - (*it)->getPosition(0);
+        smr->drap->getVertices()[(*it)->getVertex()->idx]->operator+=(deplacementPosition);
+    }
     
     // Test de déplacement de point
-    smr->drap->getVertices()[0]->operator+=(CVect3D(0, 0.01, 0));
-    
+    //smr->drap->getVertices()[0]->operator+=(CVect3D(0, 0.01, 0));
+    smr->drap->UpdateNormals();
     smr->drap->UpdateVBO();
 }
 
@@ -130,7 +186,7 @@ CVect3D CIntegrateur::f_vent(const CPoint3D& pos, const float &t) {
     float freqy = 1;
 
     //Variable de force globale
-    float force = sin(t/100);
+    float force = 3;
 
     float forceFinale = force * (ampx * sinf(freqx*(t*pos[0])) + ampy * cosf(freqy*(t*pos[0])));
 

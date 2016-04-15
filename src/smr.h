@@ -26,8 +26,12 @@ public:
     }
     
     void ajouterParticulesAdj(CParticule* _part);
+    float getMasse() { return masse; }
     CPoint3D getPosition(int index){ return pos[index]; }
-    CVect3D getVelocite(int index) { return vel[index]; }
+    CVect3D getVelocity(int index) { return vel[index]; }
+    CVertex* getVertex() { return vertex; }
+    void setPosition(int index, CPoint3D position) { pos[index] = position; }
+    void setVelocity(int index, CVect3D velocity) { vel[index] = velocity; }
     
 private:
     CPoint3D pos[2];
@@ -80,7 +84,7 @@ public:
     CIntegrateur(CSMR* _smr){ smr = _smr; }
     CSMR* smr;
     
-    void step();
+    void step(float simulationTime);
     CVect3D f_vent(const CPoint3D& pos, const float &t);
     
 };
