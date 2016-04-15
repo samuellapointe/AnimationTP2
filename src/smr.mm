@@ -119,5 +119,20 @@ void CIntegrateur::step()
 }
 
 CVect3D CIntegrateur::f_vent(const CPoint3D& pos, const float &t) {
-    return CVect3D(0, 0, 0);
+    CVect3D direction = CVect3D(0, 0, 1); //Définit la direction du vent (et sa force de base)
+
+    //Amplitude
+    float ampx = 1;
+    float ampy = 1;
+
+    //Frequence
+    float freqx = 1;
+    float freqy = 1;
+
+    //Variable de force globale
+    float force = sin(t/100);
+
+    float forceFinale = force * (ampx * sinf(freqx*(t*pos[0])) + ampy * cosf(freqy*(t*pos[0])));
+
+    return forceFinale * direction;
 }
