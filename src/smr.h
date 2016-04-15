@@ -67,8 +67,8 @@ public:
     ~CSMR();
     
     CDrap* drap;
-    std::list<CParticule*> particules;
-    std::list<CRessort*> ressorts;
+    std::vector<CParticule*> particules;
+    std::vector<CRessort*> ressorts;
     
 
     

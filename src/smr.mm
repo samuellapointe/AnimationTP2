@@ -16,23 +16,56 @@ CSMR::CSMR(CDrap* _drap)
     
     float reposH = float((*drap).getSize(0))/float((*drap).getResH());
     float reposV = float((*drap).getSize(1))/float((*drap).getResV());
-    float reposD = sqrt(pow(reposH,2)+pow(reposD,2));
+    float reposD = sqrt(pow(reposH,2)+pow(reposV,2));
     
-    int ligne = 1;
-    int cpt = 0;
-    std::list<CParticule*>::iterator it;
     
+    //Création des particules et les insérer dans la liste
     for(std::vector<CVertex*>::iterator it = (*drap).getVertices().begin(); it != (*drap).getVertices().end();it++)
     {
         CVect3D velIni(0.0,0.0,0.0);
         particules.push_back(new CParticule(*it,**it,**it,velIni,velIni,1000.0));
     }
+
     
-    for(it=particules.begin();cpt<14;it++)
+    for(int i=0; i < (*drap).getResV();i++)
     {
-        ressorts.push_back(new CRessort(*it,std::next(*it,1),reposH,100));
-        cpt++;
+        int orientation = i % 2;
+        
+        for(int j = 0; j < (*drap).getResH()-1; j++)
+        {
+            int index = (*drap).getResH()*i + j;
+            
+            //Changer l'orientation pour chaque triangle
+            int localOrientation = (orientation + j) % 2;
+            
+            //On fait un carré partant du point actuel jusqu'au point inferieur droit
+            
+            CParticule* cornerTopLeft = particules[index];
+            CParticule* cornerTopRight = particules[index+1];
+            CParticule* cornerBottomLeft = particules[index+(*drap).getResH()+0];
+            CParticule* cornerBottomRight = particules[index+(*drap).getResH()+1];
+            
+            ressorts.push_back(new CRessort(cornerTopLeft,cornerTopRight,reposH,100));
+            if(i != (*drap).getResV())
+            {
+                ressorts.push_back(new CRessort(cornerTopLeft,cornerBottomLeft,reposV,100));
+            
+                //Composé de deux triangles, orientation variante
+                if (localOrientation == 0) {
+                    ressorts.push_back(new CRessort(cornerTopRight,cornerBottomLeft,reposD,100));
+                } else {
+                    ressorts.push_back(new CRessort(cornerTopLeft,cornerBottomRight,reposD,100));
+                }
+            }
+        }
+        
+        CParticule* top = particules[i*(*drap).getResH()-1];
+        CParticule* below = particules[(i+1)*(*drap).getResH()-1];
+        
+        ressorts.push_back(new CRessort(top,below,reposV,100));
     }
+    
+    
     
 }
 
@@ -56,7 +89,7 @@ CParticule* CRessort::getP1()
 void CIntegrateur::step()
 {
     // Pour chaque particule
-    for(std::list<CParticule*>::iterator it = (smr->particules).begin(); it != (smr->particules).end();it++)
+    //for(std::list<CParticule*>::iterator it = (smr->particules).begin(); it != (smr->particules).end();it++)
     {/*
         // Interchanger la vitesse et la position
         CVect3D positionTemp = (*it)->getPosition(0);
