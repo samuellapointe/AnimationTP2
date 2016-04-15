@@ -81,6 +81,7 @@ public:
     CSMR* smr;
     
     void step();
+    CVect3D f_vent(const CPoint3D& pos, const float &t);
     
 };
 

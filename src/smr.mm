@@ -80,7 +80,11 @@ void CIntegrateur::step()
      */
     
     // Test de déplacement de point
-    smr->drap->getVertices()[0]->operator+=(CVect3D(0.1, 0, 0));
+    smr->drap->getVertices()[0]->operator+=(CVect3D(0, 0.01, 0));
     
     smr->drap->UpdateVBO();
+}
+
+CVect3D CIntegrateur::f_vent(const CPoint3D& pos, const float &t) {
+    return CVect3D(0, 0, 0);
 }
