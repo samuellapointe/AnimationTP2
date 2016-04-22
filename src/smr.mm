@@ -56,6 +56,8 @@ CSMR::CSMR(CDrap* _drap)
                     ressorts.push_back(new CRessort(cornerTopLeft,cornerBottomRight,reposD,100));
                 }
             }
+            if(i == (*drap).getResV() -1)
+                ressorts.push_back(new CRessort(cornerBottomLeft,cornerBottomRight,reposH,100));
         }
         
         if(i != (*drap).getResV() -1)
@@ -65,9 +67,7 @@ CSMR::CSMR(CDrap* _drap)
         
             ressorts.push_back(new CRessort(top,below,reposV,100));
         }
-    }
-    
-    
+    }    
     
 }
 
