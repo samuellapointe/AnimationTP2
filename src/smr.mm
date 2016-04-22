@@ -24,7 +24,7 @@ CSMR::CSMR(CDrap* _drap)
     for(std::vector<CVertex*>::iterator it = (*drap).getVertices().begin(); it != (*drap).getVertices().end();it++)
     {
         CVect3D velIni(0.0,0.0,0.0);
-        particules.push_back(new CParticule(*it,**it,**it,velIni,velIni,100.0));
+        particules.push_back(new CParticule(*it,**it,**it,velIni,velIni,50.0));
     }
 
     
@@ -144,7 +144,7 @@ void CIntegrateur::step(float simulationTime)
     // Calcul de la nouvelle vélocité et position de chaque particule
     for(std::vector<CParticule*>::iterator it = (smr->particules).begin(); it != (smr->particules).end();it++)
     {
-        if((*it)->getVertex()->idx != 0)
+        if((*it)->getVertex()->idx >= (smr->drap->getResH()))
         {
             // Nouvelle vélocité
             CVect3D forcesExternesTemp = f_vent((*it)->getPosition(0), simulationTime);
@@ -187,8 +187,8 @@ CVect3D CIntegrateur::f_vent(const CPoint3D& pos, const float &t) {
     //Variable de force globale
     float force = 3000;
 
-    //float forceFinale = force * (ampx * sinf(freqx*((t/100)+pos[0])) + ampy * cosf(freqy*((t/10)+pos[0])));
+    float forceFinale = force * (ampx * sinf(freqx*((t/100)+pos[0])) + ampy * cosf(freqy*((t/10)+pos[0])));
     //if (forceFinale < 0) forceFinale = 0;
 
-    return gravite;
+    return forceFinale * direction + gravite;
 }
