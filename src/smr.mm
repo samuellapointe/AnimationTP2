@@ -144,12 +144,7 @@ void CIntegrateur::step(float simulationTime)
     // Calcul de la nouvelle vélocité et position de chaque particule
     for(std::vector<CParticule*>::iterator it = (smr->particules).begin(); it != (smr->particules).end();it++)
     {
-        std::vector<int>pointsFixes;
-        pointsFixes.push_back(1);
-        pointsFixes.push_back(2);
-        pointsFixes.push_back((smr->drap->getResH())-2);
-        pointsFixes.push_back((smr->drap->getResH())-3);
-        if(!(std::find(pointsFixes.begin(),pointsFixes.end(),(*it)->getVertex()->idx) != pointsFixes.end()))
+        if((*it)->getVertex()->idx >= smr->drap->getResH())
         {
             // Nouvelle vélocité
             CVect3D forcesExternesTemp = f_vent((*it)->getPosition(0), simulationTime);
@@ -182,17 +177,17 @@ CVect3D CIntegrateur::f_vent(const CPoint3D& pos, const float &t) {
     CVect3D gravite = CVect3D(0, -500, 0);
 
     //Amplitude
-    float ampx = 2;
-    float ampy = 2;
+    float ampx = 1;
+    float ampy = 1;
 
     //Frequence
-    float freqx = 3;
-    float freqy = 3;
+    float freqx = 50;
+    float freqy = 50;
 
     //Variable de force globale
     float force = 300;
 
-    float forceFinale = force + (ampx * sinf(freqx*(t+pos[0])) + ampy * cosf(freqy*(t+pos[1])));
+    float forceFinale = force + (ampx * sinf(freqx*(t+pos[0])) - (ampy * cosf(freqy*(t+pos[1]))));
     //if (forceFinale < 0) forceFinale = 0;
 
     return forceFinale * direction + gravite;
