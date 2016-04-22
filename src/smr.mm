@@ -28,33 +28,23 @@ CSMR::CSMR(CDrap* _drap)
     
     for(int i=0; i < (*drap).getResV();i++)
     {
-        int orientation = i % 2;
-        
         for(int j = 0; j < (*drap).getResH()-1; j++)
         {
             int index = (*drap).getResH()*i + j;
-            
-            //Changer l'orientation pour chaque triangle
-            int localOrientation = (orientation + j) % 2;
             
             //On fait un carré partant du point actuel jusqu'au point inferieur droit
             
             CParticule* cornerTopLeft = particules[index];
             CParticule* cornerTopRight = particules[index+1];
-            CParticule* cornerBottomLeft = particules[index+(*drap).getResH()+0];
+            CParticule* cornerBottomLeft = particules[index+(*drap).getResH()];
             CParticule* cornerBottomRight = particules[index+(*drap).getResH()+1];
             
             ressorts.push_back(new CRessort(cornerTopLeft,cornerTopRight,reposH,100));
             if(i != (*drap).getResV() -1)
             {
                 ressorts.push_back(new CRessort(cornerTopLeft,cornerBottomLeft,reposV,100));
-            
-                //Composé de deux triangles, orientation variante
-                if (localOrientation == 0) {
-                    ressorts.push_back(new CRessort(cornerTopRight,cornerBottomLeft,reposD,100));
-                } else {
-                    ressorts.push_back(new CRessort(cornerTopLeft,cornerBottomRight,reposD,100));
-                }
+                ressorts.push_back(new CRessort(cornerTopRight,cornerBottomLeft,reposD,100));
+                ressorts.push_back(new CRessort(cornerTopLeft,cornerBottomRight,reposD,100));
             }
         }
         
@@ -67,7 +57,31 @@ CSMR::CSMR(CDrap* _drap)
         }
     }
     
-    
+    for(int i = 0; i < (*drap).getResV()-2;i++)
+    {
+        for(int j=0; j < (*drap).getResH()-2;j++)
+        {
+            int index = (*drap).getResH()*i + j;
+            
+            CParticule* cornerTopLeft = particules[index];
+            CParticule* cornerTopRight = particules[index+2];
+            CParticule* cornerBottomLeft = particules[index+(2*(*drap).getResH())];
+            CParticule* cornerBottomRight = particules[index+(2*(*drap).getResH())+2];
+            
+            ressorts.push_back(new CRessort(cornerTopLeft,cornerTopRight,2*reposH,100));
+            ressorts.push_back(new CRessort(cornerTopLeft,cornerBottomLeft,2*reposV,100));
+            ressorts.push_back(new CRessort(cornerTopRight,cornerBottomLeft,2*reposD,100));
+            ressorts.push_back(new CRessort(cornerTopLeft,cornerBottomRight,2*reposD,100));
+            
+            if(i == (*drap).getResV() -2)
+                ressorts.push_back(new CRessort(cornerBottomLeft,cornerBottomRight,2*reposH,100));
+        }
+        
+        CParticule* top = particules[(i+1)*(*drap).getResH()-1];
+        CParticule* below = particules[(i+3)*(*drap).getResH()-1];
+        
+        ressorts.push_back(new CRessort(top,below,2*reposV,100));
+    }
     
 }
 
