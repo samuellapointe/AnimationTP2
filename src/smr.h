@@ -13,6 +13,7 @@
 #include <vector>
 #include "drap.h"
 
+class CRessort;
 class CParticule{
 public:
     CParticule(CVertex* _v, CPoint3D _p0, CPoint3D _p1, CVect3D _vel0, CVect3D _vel1, float _masse)
@@ -23,6 +24,7 @@ public:
         vel[0] = _vel0;
         vel[1] = _vel1;
         masse = _masse;
+        force = CVect3D(0, 0, 0);
     }
     
     void ajouterParticulesAdj(CParticule* _part);
@@ -32,13 +34,19 @@ public:
     CVertex* getVertex() { return vertex; }
     void setPosition(int index, CPoint3D position) { pos[index] = position; }
     void setVelocity(int index, CVect3D velocity) { vel[index] = velocity; }
+    void addForce(CVect3D force) {this->force += force;};
+    CVect3D getForce() {return this->force;};
+    void resetForce() {this->force = CVect3D(0, 0, 0);};
+    void addRessort(CRessort* ressort) {this->ressorts.push_back(ressort);};
+    std::vector<CRessort*> getRessorts(){return ressorts;};
     
 private:
     CPoint3D pos[2];
     CVect3D vel[2];
+    CVect3D force;
     float masse;
     CVertex* vertex; //Le sommet du mesh associé à cette particule
-    std::list<CParticule*> particulesAdj; //Liste des particules connectées à celle-ci
+    std::vector<CRessort*> ressorts; //Liste des particules connectées à celle-ci
 };
 
 
@@ -55,13 +63,15 @@ public:
         P1 = _p1;
         longueur_repos = _repos;
         k = _k;
+        P0->addRessort(this);
+        P1->addRessort(this);
     }
     
     CParticule* getP0();
     CParticule* getP1();
     
 public:
-    CVect3D F() const; // Calcul de la force du ressort.
+    CVect3D F(CParticule* p0) const; // Calcul de la force du ressort.
 };
 
 

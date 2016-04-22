@@ -85,9 +85,17 @@ CSMR::CSMR(CDrap* _drap)
     
 }
 
-CVect3D CRessort::F() const
+CVect3D CRessort::F(CParticule* p0) const
 {
-    CVect3D xMinusY = (P0->getPosition(0)) - (P1->getPosition(0));
+    CParticule* p1;
+    
+    if (p0 == P0) {
+        p1 = P1;
+    } else {
+        p1 = P0;
+    }
+    
+    CVect3D xMinusY = (p0->getPosition(0)) - (p1->getPosition(0));
     CVect3D forceRessort = -k * (Module(xMinusY) - longueur_repos ) * (xMinusY/Module(xMinusY));
     return forceRessort;
 }
@@ -152,25 +160,27 @@ void CIntegrateur::step(float simulationTime)
     // Pour chaque particule, obtention de la force interne (somme des forces exercées par les ressorts attachés.
     // Pour ce faire, à chaque ressort on ajoute sa force aux particules concernées.  La force est donc calculée une seule
     // fois par ressort.
-    for(std::vector<CRessort*>::iterator it = (smr->ressorts).begin(); it != (smr->ressorts).end(); it++)
+    for(std::vector<CParticule*>::iterator it = (smr->particules).begin(); it != (smr->particules).end();it++)
     {
-        // Ajout de la force exercée par une particule voisine (reliée par un ressort)
-        CVect3D forceRessort((*it)->F());
-        (*it)->getP0()->setVelocity(1, (*it)->getP0()->getVelocity(1) + forceRessort);
-        (*it)->getP1()->setVelocity(1, (*it)->getP1()->getVelocity(1) + forceRessort);
+        CParticule * p = (*it);
+        for(int i = 0; i < p->getRessorts().size(); i++) {
+            p->addForce((p->getRessorts()[i])->F(p));
+        }
     }
     
     // Calcul de la nouvelle vélocité et position de chaque particule
     for(std::vector<CParticule*>::iterator it = (smr->particules).begin(); it != (smr->particules).end();it++)
     {
-        if((*it)->getVertex()->idx >= (smr->drap)->getResH())
+        if((*it)->getVertex()->idx >= (smr->drap->getResH()))
         {
             // Nouvelle vélocité
             CVect3D forcesExternesTemp = f_vent((*it)->getPosition(0), simulationTime);
-            (*it)->setVelocity(1, (*it)->getVelocity(0) + (h * (1/(*it)->getMasse() * (forcesExternesTemp -(*it)->getVelocity(1)))));
+            (*it)->setVelocity(1, (*it)->getVelocity(0) + (h * (1/(*it)->getMasse() * (forcesExternesTemp -(*it)->getForce()))));
         
             // Nouvelle position
             (*it)->setPosition(1, (*it)->getPosition(0) + (h * (*it)->getVelocity(1)));
+            
+            (*it)->resetForce();
         }
     }
     
@@ -189,8 +199,8 @@ void CIntegrateur::step(float simulationTime)
 }
 
 CVect3D CIntegrateur::f_vent(const CPoint3D& pos, const float &t) {
-    CVect3D direction = CVect3D(0, 0, 1); //Définit la direction du vent (et sa force de base)
-
+    CVect3D direction = CVect3D(0, -1, 0); //Définit la direction du vent (et sa force de base)
+/*
     //Amplitude
     float ampx = 1;
     float ampy = 1;
@@ -203,6 +213,7 @@ CVect3D CIntegrateur::f_vent(const CPoint3D& pos, const float &t) {
     float force = 3;
 
     float forceFinale = force * (ampx * sinf(freqx*(t*pos[0])) + ampy * cosf(freqy*(t*pos[0])));
-
+*/
+    float forceFinale = 1000;
     return forceFinale * direction;
 }
