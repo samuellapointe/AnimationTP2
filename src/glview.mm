@@ -16,6 +16,7 @@
 using namespace std;
 
 CSMR* smr;
+CIntegrateur* integrateur;
 
 static
 NSArray* open_files(NSArray* filetype_ext)
@@ -148,6 +149,7 @@ static CVReturn display_link_callback(CVDisplayLinkRef display_link,
     //Rectangle du drap (Hauteur, largeur, resolutionX, resolutionY, Bool (Drap et non plancher))
     CDrap* drap = new CDrap();
     smr = new CSMR(drap);
+    integrateur = new CIntegrateur(smr);
     drap->set_diffuse_tex_id(gl_load_texture2D([file_texture1 cStringUsingEncoding:NSUTF8StringEncoding]));
     dynamic_meshes.push_back(drap);
     
@@ -387,9 +389,7 @@ static const float rot_factor = 0.25;
     simulation_time += time_interval;
     cout << "cal_frame at time : " << simulation_time << endl;
     
-    CIntegrateur integrateur(smr);
-    
-    integrateur.step(simulation_time);
+    integrateur->step(simulation_time);
 
     
     [self setNeedsDisplay:YES];
