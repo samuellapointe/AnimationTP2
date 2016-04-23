@@ -14,6 +14,7 @@
 #include "drap.h"
 
 class CRessort;
+enum typeRessort{structural,sheer,flexion};
 class CParticule{
 public:
     CParticule(CVertex* _v, CPoint3D _p0, CPoint3D _p1, CVect3D _vel0, CVect3D _vel1, float _masse)
@@ -57,7 +58,7 @@ private:
     float k; //Constante de Hooke.
     
 public:
-    CRessort(CParticule* _p0, CParticule* _p1, float _repos, float _k)
+    CRessort(CParticule* _p0, CParticule* _p1, float _repos, float _k,enum typeRessort)
     {
         P0 = _p0;
         P1 = _p1;

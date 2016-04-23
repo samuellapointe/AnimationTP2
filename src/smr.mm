@@ -20,6 +20,10 @@ CSMR::CSMR(CDrap* _drap)
     
     int k = 1000000;
     
+    int etirementMaxH = reposH*1.1;
+    int etirementMaxV = reposV*1.1;
+    int etirementMaxD = reposD*1.1;
+    
     //Création des particules et les insérer dans la liste
     for(std::vector<CVertex*>::iterator it = (*drap).getVertices().begin(); it != (*drap).getVertices().end();it++)
     {
@@ -41,12 +45,12 @@ CSMR::CSMR(CDrap* _drap)
             CParticule* cornerBottomLeft = particules[index+(*drap).getResH()];
             CParticule* cornerBottomRight = particules[index+(*drap).getResH()+1];
             
-            ressorts.push_back(new CRessort(cornerTopLeft,cornerTopRight,reposH,k));
+            ressorts.push_back(new CRessort(cornerTopLeft,cornerTopRight,reposH,k,typeRessort::structural));
             if(i != (*drap).getResV() -1)
             {
-                ressorts.push_back(new CRessort(cornerTopLeft,cornerBottomLeft,reposV,k));
-                ressorts.push_back(new CRessort(cornerTopRight,cornerBottomLeft,reposD,k));
-                ressorts.push_back(new CRessort(cornerTopLeft,cornerBottomRight,reposD,k));
+                ressorts.push_back(new CRessort(cornerTopLeft,cornerBottomLeft,reposV,k,typeRessort::structural));
+                ressorts.push_back(new CRessort(cornerTopRight,cornerBottomLeft,reposD,k,typeRessort::sheer));
+                ressorts.push_back(new CRessort(cornerTopLeft,cornerBottomRight,reposD,k,typeRessort::sheer));
             }
         }
         
@@ -55,7 +59,7 @@ CSMR::CSMR(CDrap* _drap)
             CParticule* top = particules[(i+1)*(*drap).getResH()-1];
             CParticule* below = particules[(i+2)*(*drap).getResH()-1];
         
-            ressorts.push_back(new CRessort(top,below,reposV,k));
+            ressorts.push_back(new CRessort(top,below,reposV,k,typeRessort::structural));
         }
     }
     
@@ -70,19 +74,19 @@ CSMR::CSMR(CDrap* _drap)
             CParticule* cornerBottomLeft = particules[index+(2*(*drap).getResH())];
             CParticule* cornerBottomRight = particules[index+(2*(*drap).getResH())+2];
             
-            ressorts.push_back(new CRessort(cornerTopLeft,cornerTopRight,2*reposH,k));
-            ressorts.push_back(new CRessort(cornerTopLeft,cornerBottomLeft,2*reposV,k));
-            ressorts.push_back(new CRessort(cornerTopRight,cornerBottomLeft,2*reposD,k));
-            ressorts.push_back(new CRessort(cornerTopLeft,cornerBottomRight,2*reposD,k));
+            ressorts.push_back(new CRessort(cornerTopLeft,cornerTopRight,2*reposH,k,typeRessort::flexion));
+            ressorts.push_back(new CRessort(cornerTopLeft,cornerBottomLeft,2*reposV,k,typeRessort::flexion));
+            ressorts.push_back(new CRessort(cornerTopRight,cornerBottomLeft,2*reposD,k,typeRessort::flexion));
+            ressorts.push_back(new CRessort(cornerTopLeft,cornerBottomRight,2*reposD,k,typeRessort::flexion));
             
             if(i == (*drap).getResV() -2)
-                ressorts.push_back(new CRessort(cornerBottomLeft,cornerBottomRight,2*reposH,k));
+                ressorts.push_back(new CRessort(cornerBottomLeft,cornerBottomRight,2*reposH,k,typeRessort::flexion));
         }
         
         CParticule* top = particules[(i+1)*(*drap).getResH()-1];
         CParticule* below = particules[(i+3)*(*drap).getResH()-1];
         
-        ressorts.push_back(new CRessort(top,below,2*reposV,k));
+        ressorts.push_back(new CRessort(top,below,2*reposV,k,typeRessort::flexion));
     }
     
 }
@@ -120,13 +124,8 @@ void CIntegrateur::step(float simulationTime)
     for(std::vector<CParticule*>::iterator it = (smr->particules).begin(); it != (smr->particules).end();it++)
     {
         // Interchanger les vitesses et les positions
-        //positionTemp = (*it)->getPosition(0);
         (*it)->setPosition(0, (*it)->getPosition(1));
-        //(*it)->setPosition(1, CPoint3D(0,0,0));
-        
-        //vitesseTemp = (*it)->getVelocity(0);
         (*it)->setVelocity(0, (*it)->getVelocity(1));
-        //(*it)->setVelocity(1, CVect3D(0,0,0));
     }
     
 
@@ -136,7 +135,7 @@ void CIntegrateur::step(float simulationTime)
     for(std::vector<CParticule*>::iterator it = (smr->particules).begin(); it != (smr->particules).end();it++)
     {
         CParticule * p = (*it);
-        for(int i = 0; i < p->getRessorts().size(); i++) {
+        for(int i = 0; i < p->getRessorts().size(); i++) {
             p->addForce((p->getRessorts()[i])->F(p));
         }
     }
@@ -163,7 +162,7 @@ void CIntegrateur::step(float simulationTime)
     for(std::vector<CParticule*>::iterator it = (smr->particules).begin(); it != (smr->particules).end();it++)
     {
         deplacementPosition = (*it)->getPosition(1) - (*it)->getPosition(0);
-        smr->drap->getVertices()[(*it)->getVertex()->idx]->operator+=(deplacementPosition);
+        *smr->drap->getVertices()[(*it)->getVertex()->idx]+= deplacementPosition;
     }
     
     // Test de déplacement de point
